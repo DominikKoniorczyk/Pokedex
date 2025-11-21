@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "OpenSans";
+    src: url('../assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf');
+}
+
 body{
     background-color: #05171e;
     display: flex;
@@ -5,14 +10,22 @@ body{
     align-items: center;
     color: white;
     text-shadow: 2px 2px black;
+    font-family: OpenSans;
+    margin: 0;
+    gap: 16px;
 }
 
 h2{
     margin-block: 0;
+    font-size: 22px;
 }
 
 header{
-    height: 320px;
+    height: 120px;
+    width: 100%;
+    background-color: #082129;
+    display: flex;
+    justify-content: center;
 }
 
 .inner {
@@ -20,7 +33,7 @@ header{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     gap: 16px;
 }
 
