@@ -5,7 +5,7 @@ function initWebsite(){
 // #region get data from api
 async function getNextPokemon(){
     loadDone = false;
-    const response = await fetch(BASE_URL + limitUrl + ".json");
+    const response = await fetch(BASE_URL + lastLoadedElements + ".json");
     let responseToJson = await response.json();
     responseToJson.results.forEach(result => {
         let lastEl = responseToJson.results.findLast((element) => element) == result;
