@@ -18,13 +18,11 @@ function addEventListener(){
 
 function checkElementIsInView(scrollYPosition)
 {
-    if(lastLoadedElements < 500){
-        let elementsPerRow = window.innerWidth < 1440 ? Math.floor(window.innerWidth / 236) : 6;
-        let positionY = (((lastLoadedElements - 6) / elementsPerRow) * 320) - window.innerHeight;
+    let elementsPerRow = window.innerWidth < 1440 ? Math.floor(window.innerWidth / 236) : 6;
+    let positionY = (((renderedPokemon - 12) / elementsPerRow) * 320) - window.innerHeight;
 
-        if(positionY <= scrollYPosition){
-            getNextPokemon();
-        }
+    if(positionY <= scrollYPosition){
+        getNextPokemon();
     }
 }
 // #endregion
@@ -44,17 +42,18 @@ async function renderMainCard(responseData={}, lastElement=bool){
     const URL = responseData.url;
     const response = await fetch(URL);
     let responseToJson = await response.json();    
-    if(pokemon.findIndex(element => element.id === responseToJson.id) === -1){    
+    if(pokemon.findIndex(element => element.id === responseToJson.id) === -1 && pokemonDataBase.findIndex(element => element.id === responseToJson.id) === -1){    
         pokemon.push({id: responseToJson.id, name: responseToJson.name, mainImage: responseToJson.sprites.other.home.front_default, types: [responseToJson.types], weight: responseToJson.weight, stats: responseToJson.stats});
         loadDone = lastElement;
-        lastLoadedElements ++;
+        renderedPokemon ++;
         if(loadDone){
             sortPokemonById();
+            lastLoadedElements += 50;
         }}
 }
 
 function sortPokemonById(){
-    pokemon.slice().sort((a, b) => a.id - b.id);
+    pokemon.sort((a, b) => a.id - b.id);
     for(let i = 0; i < pokemon.length; i++)
     {
         if(i + 1 < pokemon.length){
