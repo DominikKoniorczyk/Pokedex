@@ -1,6 +1,21 @@
+// #region init function, eventlistener on scroll and reloading function
 function initWebsite(){
+    addEventListener();
     getNextPokemon();
 }
+
+function addEventListener(){
+    document.addEventListener("scroll", (event) => {
+    const SCROLL_POSITION = window.scrollY;
+    if (!scrollChecking) {
+        setTimeout(() => {
+            checkElementIsInView(SCROLL_POSITION);
+            scrollChecking = false;
+            }, 20);
+        scrollChecking = true;}
+    }); 
+}
+// #endregion
 
 // #region get data from api
 async function getNextPokemon(){
