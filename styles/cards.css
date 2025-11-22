@@ -58,6 +58,7 @@
     transition: all 0.2s;
     filter: drop-shadow(0 0 12px white);
     transform: scale(1.1);
+    cursor: pointer;
 
     h2{
         text-shadow: 4px 4px 4px red;
