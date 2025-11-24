@@ -21,10 +21,8 @@ function checkElementIsInView(scrollYPosition)
     let elementsPerRow = window.innerWidth < 1440 ? Math.floor(window.innerWidth / 236) : 6;
     let positionY = (((renderedPokemon - 25) / elementsPerRow) * 300) - window.innerHeight;
 
-    console.log("Scrollpos: " + scrollYPosition + "; Position to be: " + positionY + "; Pokemon rendered count: " + renderedPokemon);
-
     if(positionY <= scrollYPosition){
-        getNextPokemon();         
+        renderNextCards();         
     }
 }
 // #endregion
@@ -32,7 +30,7 @@ function checkElementIsInView(scrollYPosition)
 // #region get data from api
 async function getNextPokemon(){
     loadDone = false;
-    const response = await fetch(BASE_URL + lastLoadedElements + ".json");
+    const response = await fetch(BASE_URL + ".json");
     let responseToJson = await response.json();
     responseToJson.results.forEach(result => {
         let lastEl = responseToJson.results.findLast((element) => element) == result;
@@ -44,13 +42,12 @@ async function renderMainCard(responseData={}, lastElement=bool){
     const URL = responseData.url;
     const response = await fetch(URL);
     let responseToJson = await response.json();    
-    if(pokemon.findIndex(element => element.id === responseToJson.id) === -1 && pokemonDataBase.findIndex(element => element.id === responseToJson.id) === -1){    
+    if(pokemon.findIndex(element => element.id === responseToJson.id) === -1){    
         pokemon.push({id: responseToJson.id, name: responseToJson.name, mainImage: responseToJson.sprites.other.home.front_default, types: [responseToJson.types], weight: responseToJson.weight, stats: responseToJson.stats});
         loadDone = lastElement;
-        renderCount++;
+        test.push(responseToJson);
         if(loadDone){
             sortPokemonById();
-            lastLoadedElements += 50;
         }}
 }
 
@@ -63,8 +60,6 @@ function sortPokemonById(){
             pokemon.slice(i + 1, 1);
         }}
     }
-    pokemonDataBase = pokemonDataBase.concat(pokemon);
-    pokemon = [];
     renderNextCards();
 }
 // #endregion
@@ -72,26 +67,19 @@ function sortPokemonById(){
 // #region render cards
 async function renderNextCards(){
     const BODY_ELEMENT = document.getElementById('card_content');
-    for (let i = renderedPokemon; i < pokemonDataBase.length; i++) {
+    let end = renderedPokemon + 50;
+    for (let i = renderedPokemon; i < end; i++) {
+        renderedPokemon++;
         let pokemonClasses = "";
-        pokemonDataBase[i].types[0].forEach(classes => {
+        if(pokemon[i].types.length > 0){
+            pokemon[i].types[0].forEach(classes => {
                 pokemonClasses += returnClassImages(classes);   
-                test.push(classes.type.url) 
-            });            
-        renderedPokemon ++;
-        BODY_ELEMENT.innerHTML += returnCardTemplate(pokemonDataBase[i], pokemonClasses);        
-    }
-    checkRenderedPokemonCount();
-}
-
-
-function checkRenderedPokemonCount(){
-    if(renderCount < 50){
-        getNextPokemon();
-    } else {
-        renderCount = 0;
+            });          
+        }
+        BODY_ELEMENT.innerHTML += returnCardTemplate(pokemon[i], pokemonClasses);        
     }
 }
+
 let test = []
 
 async function Test() {
