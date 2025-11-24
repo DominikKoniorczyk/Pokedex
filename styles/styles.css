@@ -1,0 +1,41 @@
+.checkbox{
+    height: 20px;
+    width: 20px;
+}
+
+.search_field{
+    width: 240px;
+    height: 32px;
+    cursor: text;
+}
+
+.auto_load{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.middle_header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.inner {
+    max-width: 1440px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+.center_text{
+    text-align: center;
+}
+
+.head {
+    justify-content: space-between;
+    align-items: center;
+}

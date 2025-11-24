@@ -26,17 +26,27 @@ header{
     background-color: #082129;
     display: flex;
     justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 9;
 }
 
-.inner {
-    max-width: 1440px;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
+input{
+    width: 80px;
+    height: 36px;
+    background-color: #0e3b4a;
+    color: white;
+    border: 1px solid;
+    border-radius: 2px;
+    cursor: pointer;
 }
 
-.center_text{
-    text-align: center;
+button {
+    background-color: #0e3b4a;
+    border: 1px solid;
+    border-color: white;
+    color: white;
+    height: 32px;
+    cursor: pointer;
 }

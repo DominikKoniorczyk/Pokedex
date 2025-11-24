@@ -7,17 +7,29 @@
     <link rel="stylesheet" href="./styles/default.css">
     <link rel="stylesheet" href="./styles/colors.css">
     <link rel="stylesheet" href="./styles/cards.css">
+    <link rel="stylesheet" href="./styles/styles.css">
 
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/db.js"></script>
+    <script src="./scripts/events.js"></script>
     <script src="./scripts/script.js" defer></script>
 
     <title>Pokedex</title>
 </head>
 <body onload="initWebsite()">
     <header>
-        <div class = "inner">
-
+        <div class = "inner head">
+            <img src="" alt="">
+            <div class="middle_header">
+                <div class="auto_load">
+                    <input class="checkbox" type="checkbox" name="Auto Reload" id="autoReload" onchange="changeReloadMethod()">Automatisches laden aktivieren 
+                </div>
+                <button onclick="renderNextCards()">Mehr Pokemon laden</button>
+            </div>
+            <div>
+                <input id="searchField" class="search_field" type="text" placeholder="Nach Pokemon suchen..." onkeyup="searchPokemon(false)">
+                <input type="submit" value="Suchen" onclick="searchPokemon(true)">
+            </div>
         </div>
     </header>
 
