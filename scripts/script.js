@@ -19,10 +19,12 @@ function addEventListener(){
 function checkElementIsInView(scrollYPosition)
 {
     let elementsPerRow = window.innerWidth < 1440 ? Math.floor(window.innerWidth / 236) : 6;
-    let positionY = (((renderedPokemon - 12) / elementsPerRow) * 320) - window.innerHeight;
+    let positionY = (((renderedPokemon - 25) / elementsPerRow) * 300) - window.innerHeight;
+
+    console.log("Scrollpos: " + scrollYPosition + "; Position to be: " + positionY + "; Pokemon rendered count: " + renderedPokemon);
 
     if(positionY <= scrollYPosition){
-        getNextPokemon();
+        getNextPokemon();         
     }
 }
 // #endregion
@@ -46,6 +48,7 @@ async function renderMainCard(responseData={}, lastElement=bool){
         pokemon.push({id: responseToJson.id, name: responseToJson.name, mainImage: responseToJson.sprites.other.home.front_default, types: [responseToJson.types], weight: responseToJson.weight, stats: responseToJson.stats});
         loadDone = lastElement;
         renderedPokemon ++;
+        renderCount++;
         if(loadDone){
             sortPokemonById();
             lastLoadedElements += 50;
@@ -79,9 +82,16 @@ async function renderCardsOnPage(){
             });
         BODY_ELEMENT.innerHTML += returnCardTemplate(actualPokemon, pokemonClasses);
     });
-    Test();
+    checkRenderedPokemonCount();
 }
 
+function checkRenderedPokemonCount(){
+    if(renderCount < 50){
+        getNextPokemon();
+    } else {
+        renderCount = 0;
+    }
+}
 let test = []
 
 async function Test() {
