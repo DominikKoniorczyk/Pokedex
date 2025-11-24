@@ -2,6 +2,7 @@ let pokemon = [];
 let pokemonDataBase = [];
 let loadDone = false;
 let scrollChecking = false;
+let pokemonToRender = 0;
 let renderedPokemon = 0;
 let renderCount = 0;
 let lastLoadedElements = 0;

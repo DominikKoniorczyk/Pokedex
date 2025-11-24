@@ -47,7 +47,6 @@ async function renderMainCard(responseData={}, lastElement=bool){
     if(pokemon.findIndex(element => element.id === responseToJson.id) === -1 && pokemonDataBase.findIndex(element => element.id === responseToJson.id) === -1){    
         pokemon.push({id: responseToJson.id, name: responseToJson.name, mainImage: responseToJson.sprites.other.home.front_default, types: [responseToJson.types], weight: responseToJson.weight, stats: responseToJson.stats});
         loadDone = lastElement;
-        renderedPokemon ++;
         renderCount++;
         if(loadDone){
             sortPokemonById();
@@ -66,24 +65,25 @@ function sortPokemonById(){
     }
     pokemonDataBase = pokemonDataBase.concat(pokemon);
     pokemon = [];
-    renderCardsOnPage();
+    renderNextCards();
 }
 // #endregion
 
 // #region render cards
-async function renderCardsOnPage(){
-    const BODY_ELEMENT = document.getElementById('card_content'); 
-    BODY_ELEMENT.innerHTML = "";
-    await pokemonDataBase.forEach(actualPokemon => {
-            let pokemonClasses = "";
-            actualPokemon.types[0].forEach(classes => {
+async function renderNextCards(){
+    const BODY_ELEMENT = document.getElementById('card_content');
+    for (let i = renderedPokemon; i < pokemonDataBase.length; i++) {
+        let pokemonClasses = "";
+        pokemonDataBase[i].types[0].forEach(classes => {
                 pokemonClasses += returnClassImages(classes);   
                 test.push(classes.type.url) 
-            });
-        BODY_ELEMENT.innerHTML += returnCardTemplate(actualPokemon, pokemonClasses);
-    });
+            });            
+        renderedPokemon ++;
+        BODY_ELEMENT.innerHTML += returnCardTemplate(pokemonDataBase[i], pokemonClasses);        
+    }
     checkRenderedPokemonCount();
 }
+
 
 function checkRenderedPokemonCount(){
     if(renderCount < 50){
