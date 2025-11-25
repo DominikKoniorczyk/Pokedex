@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./styles/cards.css">
     <link rel="stylesheet" href="./styles/styles.css">
     <link rel="stylesheet" href="./styles/types.css">
+    <link rel="stylesheet" href="./styles/dialog.css">
 
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/db.js"></script>
@@ -20,7 +21,7 @@
 <body onload="initWebsite()">
     <header>
         <div class = "inner head">
-            <img class="logo" src="./assets/img/pokedex_logo.gif" alt="Pokedex logo">
+            <a href="index.html"><img class="logo" src="./assets/img/pokedex_logo.gif" alt="Pokedex logo"></a>
             <div class="middle_header">
                 <div class="auto_load">
                     <input class="checkbox" type="checkbox" name="Auto Reload" id="autoReload" onchange="changeReloadMethod()">Automatisches laden aktivieren 
@@ -34,6 +35,10 @@
     <main id="card_content" class="inner">
 
     </main>
+
+    <dialog id="details">
+
+    </dialog>
 
     <footer>
         <a href="impressum.html">Impressum</a>

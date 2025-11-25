@@ -10,7 +10,7 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
-    background-color: #082129;
+    background-color: var(--secondary-bg-color);
 
     .card_headline {
         display: flex;
@@ -46,7 +46,7 @@
         justify-content: center;
         border-radius: 20px;
         border: solid;
-        border-color: white;
+        border-color: var(--font-color);
         border-width: 1px;
 
         &:hover{
@@ -58,7 +58,7 @@
 
   &:hover{
     transition: all 0.2s;
-    filter: drop-shadow(0 0 12px white);
+    filter: drop-shadow(0 0 12px var(--font-color));
     transform: scale(1.1);
     cursor: pointer;
 
@@ -81,7 +81,7 @@
 
 img {
   width: 140px;
-  filter: drop-shadow(8px 8px 12px black);
+  filter: drop-shadow(8px 8px 12px var(--shadow-color));
   height: 140px;
   margin: 16px;
 }

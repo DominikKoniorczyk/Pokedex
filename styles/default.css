@@ -1,23 +1,35 @@
+:root{
+    --primary-bg-color: #05171e; 
+    --secondary-bg-color: #082129;
+    --shadow-color: black;
+    --font-color: white;
+    --highlight-color: #0e3b4a;
+}
+
 @font-face {
     font-family: "OpenSans";
     src: url('../assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf');
 }
 
 body{
-    background-color: #05171e;
+    background-color: var(--primary-bg-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
-    text-shadow: 2px 2px black;
+    color: var(--font-color);
+    text-shadow: 2px 2px var(--shadow-color);
     font-family: OpenSans;
     margin: 0;
     gap: 16px;
 }
 
+main{
+    min-height: calc(100dvh - 240px - 32px);
+}
+
 a{
     text-decoration: none;
-    color: white;
+    color: var(--font-color);
     cursor: pointer;
     font-size: 32px;
 
@@ -36,7 +48,7 @@ h2{
 header{
     height: 120px;
     width: 100%;
-    background-color: #082129;
+    background-color: var(--secondary-bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +60,7 @@ header{
 footer{
     height: 120px;
     width: 100%;
-    background-color: #082129;
+    background-color: var(--secondary-bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,18 +69,18 @@ footer{
 input{
     width: 80px;
     height: 36px;
-    background-color: #0e3b4a;
-    color: white;
+    background-color: var(--highlight-color);
+    color: var(--font-color);
     border: 1px solid;
     border-radius: 2px;
     cursor: pointer;
 }
 
 button {
-    background-color: #0e3b4a;
+    background-color: var(--highlight-color);
     border: 1px solid;
-    border-color: white;
-    color: white;
+    border-color: var(--font-color);
+    color: var(--font-color);
     height: 32px;
     cursor: pointer;
 }
