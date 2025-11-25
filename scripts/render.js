@@ -16,10 +16,20 @@ function renderNextCards(search){
 async function openDialog(id){
     const dialogRef = document.getElementById("details");
     const evolutionChain = await getEvolutionChain(id);
+    const evolutionImages = []
     evolutionChain.forEach(evolution => {
-
+        evolutionImages.push(evolution.mainImage != null ? evolution.mainImage : "./assets/img/question.png");
     })
-    
+
+    switch (evolutionChain.length){
+        case 1: console.log("Keine Entwicklungsstufen");
+                break;
+        case 2: console.log("Zwei Stufen");     
+                break;
+        case 3: console.log("Drei Stufen");
+                break;
+    }
+
 
     dialogRef.innerHTML = /*html*/`
         <div class="dialog_body">
