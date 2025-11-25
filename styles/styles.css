@@ -39,3 +39,14 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.impressum_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    a{
+        font-size: 20px;
+    }
+}
