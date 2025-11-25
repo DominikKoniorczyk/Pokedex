@@ -21,23 +21,32 @@ function checkElementIsInView(scrollYPosition)
 async function getNextPokemon(){
     loadDone = false;
     const response = await fetch(BASE_URL + ".json");
-    let responseToJson = await response.json();
+    const responseToJson = await response.json();
     responseToJson.results.forEach(result => {
-        let lastEl = responseToJson.results.findLast((element) => element) == result;
-        renderMainCard(result, lastEl);
+        const lastElement = responseToJson.results.findLast((element) => element) == result;
+        fetchApiData(result, lastElement);
     });
-
-    let test = await fetch("https://pokeapi.co/api/v2/evolution-chain/1");
-    let testJSON = await test.json();
-    test2.push(testJSON)
 }
 
-async function renderMainCard(responseData={}, lastElement=bool){
-    const URL = responseData.url;
-    const response = await fetch(URL);
-    let responseToJson = await response.json();    
-    if(pokemon.findIndex(element => element.id === responseToJson.id) === -1){  
-        pokemon.push({id: responseToJson.id, name: responseToJson.name.charAt(0).toUpperCase() + responseToJson.name.slice(1), nameLowerCase: responseToJson.name, mainImage: responseToJson.sprites.other.home.front_default, types: [responseToJson.types], weight: responseToJson.weight, stats: responseToJson.stats});
+async function returnAdditionalInfo(responseData={}){
+    const response = await fetch(responseData.species.url);
+    const responseToJson = await response.json();      
+    return responseToJson;
+}
+
+async function fetchApiData(responseData, lastElement){
+    const mainInfoUrl = responseData.url; 
+    const mainInfo = await fetch(mainInfoUrl);
+    const mainInfoToJson = await mainInfo.json();    
+    const additionalInformation = await returnAdditionalInfo(mainInfoToJson);
+    const Data = {id: mainInfoToJson.id, name: mainInfoToJson.name.charAt(0).toUpperCase() + mainInfoToJson.name.slice(1), nameLowerCase: mainInfoToJson.name, mainImage: mainInfoToJson.sprites.other.home.front_default, types: [mainInfoToJson.types], weight: mainInfoToJson.weight, stats: mainInfoToJson.stats, additionals: additionalInformation};
+    formateData(Data, lastElement);
+}
+
+async function formateData(data={}, lastElement=bool){      
+    
+    if(pokemon.findIndex(element => element.id === data.id) === -1){  
+        pokemon.push(data);
         loadDone = lastElement;
         if(loadDone){
             sortPokemonById();
@@ -109,7 +118,6 @@ async function renderSearchPokemon(){
 // #endregion
 
 function openDialog(id){
-    console.log("Klick to open: " + pokemon[id].name);
     const DIALOG_REF = document.getElementById("details");
     DIALOG_REF.innerHTML = /*html*/`
         <div class="dialog_body">
