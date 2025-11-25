@@ -38,6 +38,10 @@ async function renderMainCard(responseData={}, lastElement=bool){
         if(loadDone){
             sortPokemonById();
         }}
+
+        if(!test2.includes(responseToJson.types[0].type.name)){        
+            test2.push(responseToJson.types[0].type.name);}
+        
 }
 
 function sortPokemonById(){
