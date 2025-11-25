@@ -56,3 +56,11 @@
     width: auto;
     filter: drop-shadow(8px 8px 12px black)
 }
+
+.type_img{
+    filter: invert();
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    background-position: bottom;
+}

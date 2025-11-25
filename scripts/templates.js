@@ -20,7 +20,7 @@ function returnCardTemplate(pokemonData={}, classes) {
 function returnClassImages(data){
     return /*html*/`
         <button class = "class_icon ${data.type.name}">
-            <div class ="${data.type.name}_imgage" src="" alt="">
+            <div class ="${data.type.name}_image type_img" src="" alt="">
         </button>
     `;
 }

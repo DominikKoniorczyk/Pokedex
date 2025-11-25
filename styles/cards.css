@@ -42,11 +42,17 @@
         width: 40px;
         height: 40px;
         display: flex;
-        align-content: center;
+        align-items: center;
+        justify-content: center;
         border-radius: 20px;
         border: solid;
         border-color: white;
         border-width: 1px;
+
+        &:hover{
+          transition: all 0.2s;
+          transform: scale(1.1);
+        }
     }
   }
 

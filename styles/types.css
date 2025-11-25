@@ -1,0 +1,76 @@
+.grass_image{
+    background-image: url("../assets/classes/gras.png");
+    
+}
+
+.fire_image{
+    background-image: url("../assets/classes/fire.png");
+}
+
+.water_image{
+    background-image: url("../assets/classes/water.png");
+}
+
+.bug_image{
+    background-image: url("../assets/classes/bug.png");
+}
+
+.normal_image{
+    background-image: url("../assets/classes/normal.png");
+}
+
+.poison_image{
+    background-image: url("../assets/classes/poison.png");
+}
+
+.electric_image{
+    background-image: url("../assets/classes/electric.png");
+}
+
+.ground_image{
+    background-image: url("../assets/classes/ground.png");
+}
+
+.fairy_image{
+    background-image: url("../assets/classes/fairy.png");
+}
+
+
+
+
+
+.ice_image{
+    background-image: url("../assets/classes/ice.png");
+}
+
+.rock_image{
+    background-image: url("../assets/classes/rock.png");
+}
+
+.psychic_image{
+    background-image: url("../assets/classes/psychic.png");
+}
+
+.dragon_image{
+    background-image: url("../assets/classes/dragon.png");
+}
+
+.dark_image{
+    background-image: url("../assets/classes/dark.png");
+}
+
+.ghost_image{
+    background-image: url("../assets/classes/ghost.png");
+}
+
+.flying_image{
+    background-image: url("../assets/classes/flying.png");
+}
+
+.fighting_image{
+    background-image: url("../assets/classes/fighting.png");
+}
+
+.steel_image{
+    background-image: url("../assets/classes/steel.png");
+}
