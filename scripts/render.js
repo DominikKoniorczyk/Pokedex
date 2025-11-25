@@ -13,13 +13,13 @@ function renderNextCards(search){
     }
 }
 
-function openDialog(id){
+async function openDialog(id){
     const dialogRef = document.getElementById("details");
-    const evolutionChain = getEvolutionChain(id);
-    evolutionChain.forEach(chainPokemon => {
-        
-    })
+    const evolutionChain = await getEvolutionChain(id);
+    evolutionChain.forEach(evolution => {
 
+    })
+    
 
     dialogRef.innerHTML = /*html*/`
         <div class="dialog_body">

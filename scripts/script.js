@@ -45,7 +45,7 @@ async function getEvolutionChain(id){
     const firstPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.species.name))[0];
     const secondPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.evolves_to[0].species.name))[0];
     const thirdPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.evolves_to[0].evolves_to[0].species.name))[0];
-    return {first: firstPokemon, second: secondPokemon, third: thirdPokemon};    
+    return [firstPokemon, secondPokemon, thirdPokemon];    
 }
 
 function sortPokemonById(){
