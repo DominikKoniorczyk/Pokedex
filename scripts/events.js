@@ -24,3 +24,15 @@ function changeReloadMethod(){
         autoReload = false;
     } 
 }
+
+function checkElementIsInView(scrollYPosition)
+{
+    if(autoReload){
+        const elementsPerRow = window.innerWidth < 1440 ? Math.floor(window.innerWidth / 236) : 6;
+        const positionY = (((renderedPokemon - 25) / elementsPerRow) * 300) - window.innerHeight;
+
+        if(positionY <= scrollYPosition){
+            renderNextCards();         
+        }
+    }
+}

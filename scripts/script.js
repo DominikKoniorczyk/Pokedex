@@ -1,24 +1,10 @@
-// #region init function, eventlistener on scroll and reloading function
 function initWebsite(){
     addEventListener();
-    getNextPokemon();
+    getAllPokemon();
 }
-
-function checkElementIsInView(scrollYPosition)
-{
-    if(autoReload){
-        const elementsPerRow = window.innerWidth < 1440 ? Math.floor(window.innerWidth / 236) : 6;
-        const positionY = (((renderedPokemon - 25) / elementsPerRow) * 300) - window.innerHeight;
-
-        if(positionY <= scrollYPosition){
-            renderNextCards();         
-        }
-}
-}
-// #endregion
 
 // #region get data from api
-async function getNextPokemon(){
+async function getAllPokemon(){
     loadDone = false;
     const response = await fetch(BASE_URL + ".json");
     const responseToJson = await response.json();
@@ -40,17 +26,26 @@ async function fetchApiData(responseData, lastElement){
     const mainInfoToJson = await mainInfo.json();    
     const additionalInformation = await returnAdditionalInfo(mainInfoToJson);
     const Data = {id: mainInfoToJson.id, name: mainInfoToJson.name.charAt(0).toUpperCase() + mainInfoToJson.name.slice(1), nameLowerCase: mainInfoToJson.name, mainImage: mainInfoToJson.sprites.other.home.front_default, types: [mainInfoToJson.types], weight: mainInfoToJson.weight, stats: mainInfoToJson.stats, additionals: additionalInformation};
-    formateData(Data, lastElement);
+    formateApiData(Data, lastElement);
 }
 
-async function formateData(data={}, lastElement=bool){      
-    
+async function formateApiData(data={}, lastElement=bool){      
     if(pokemon.findIndex(element => element.id === data.id) === -1){  
         pokemon.push(data);
         loadDone = lastElement;
         if(loadDone){
             sortPokemonById();
-        }};
+        }
+    };
+}
+
+async function getEvolutionChain(id){
+    const response = await fetch(pokemon[id].additionals.evolution_chain.url);
+    const responseToJson = await response.json();
+    const firstPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.species.name))[0];
+    const secondPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.evolves_to[0].species.name))[0];
+    const thirdPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.evolves_to[0].evolves_to[0].species.name))[0];
+    return {first: firstPokemon, second: secondPokemon, third: thirdPokemon};    
 }
 
 function sortPokemonById(){
@@ -62,24 +57,10 @@ function sortPokemonById(){
             pokemon.slice(i + 1, 1);
         }}
     }
+    pokemonToRender = pokemon;
     renderNextCards();
 }
 // #endregion
-
-async function renderNextCards(){
-    const BODY_ELEMENT = document.getElementById('card_content');
-    let end = renderedPokemon + 50;
-    for (let i = renderedPokemon; i < end; i++) {
-        renderedPokemon++;
-        let pokemonClasses = "";
-        if(pokemon[i].types.length > 0){
-            pokemon[i].types[0].forEach(classes => {
-                pokemonClasses += returnClassImages(classes);   
-            });          
-        }
-        BODY_ELEMENT.innerHTML += returnCardTemplate(pokemon[i], pokemonClasses, i, returnImagePath(pokemon[i]));        
-    }
-}
 
 function returnImagePath(pokemon){
     if(pokemon.mainImage != null){
@@ -89,49 +70,15 @@ function returnImagePath(pokemon){
     }
 }
 
-// #region search functions
 async function searchForPokemon(searchString){
-    pokemonToRender = pokemon.filter(pokemon => pokemon.id == parseInt(searchString) || pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString));
+    pokemonToRender = await pokemon.filter(pokemon => pokemon.id == parseInt(searchString) || pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString));
 
-    if(searchString.length > 0){
-        renderSearchPokemon();
-    } else {
-        renderedPokemon = 0;
-        document.getElementById('card_content').innerHTML = "";
-        renderNextCards();
-    }
-}
-
-async function renderSearchPokemon(){
+    renderedPokemon = 0;
     const BODY_ELEMENT = document.getElementById('card_content');
     BODY_ELEMENT.innerHTML = "";
-    for (let i = 0; i < pokemonToRender.length; i++) {
-        let pokemonClasses = "";
-        if(pokemonToRender[i].types.length > 0){
-            pokemonToRender[i].types[0].forEach(classes => {
-                pokemonClasses += returnClassImages(classes);   
-            });          
-        }
-        BODY_ELEMENT.innerHTML += returnCardTemplate(pokemonToRender[i], pokemonClasses, i, returnImagePath(pokemonToRender[i]));        
+    if(searchString.length == 0){
+        renderNextCards(false);
+    } else{
+        renderNextCards(true);
     }
-}
-// #endregion
-
-function openDialog(id){
-    const DIALOG_REF = document.getElementById("details");
-    DIALOG_REF.innerHTML = /*html*/`
-        <div class="dialog_body">
-            <header class="dialog_header">
-                    <h2>#${pokemon[id].id}</h2>
-                    <h2 class="dialog_inner_headline">${pokemon[id].name}</h2>
-            </header>
-            <div class="dialog_main_img ${pokemon[id].types[0][0].type.name}">
-                <img src="${returnImagePath(pokemon[id])}" alt="" srcset="">
-            </div>
-            <div class="dialog_classes">
-                ${returnClassImages(pokemon[id].types[0][0])}
-            </div>
-        </div>
-    `    
-    DIALOG_REF.showModal();
 }
