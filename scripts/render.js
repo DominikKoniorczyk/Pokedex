@@ -19,7 +19,7 @@ async function openDialog(id){
     const evolutionChain = await getEvolutionChain(id);
     const evolutionImages = [];
 
-
+    dialogRef.classList.remove('d_none');
     dialogRef.innerHTML = /*html*/`
         <div class="dialog_body">
             <header class="dialog_header">
@@ -39,12 +39,19 @@ async function openDialog(id){
                     <button id="mainButton" class="dialog_switch_button dialog_switch_button_active" onclick="changeDialogInfo(${0})">main</button>
                     <button id="statsButton" class="dialog_switch_button" onclick="changeDialogInfo(${1})">stats</button>
                     <button id="evoChainButton" class="dialog_switch_button" onclick="changeDialogInfo(${2})">evo chain</button>
+                    <button id="shinyButton" class="dialog_switch_button" onclick="changeDialogInfo(${3})">shiny</button>
                 </div>
 
-                <div class="lastContainer">
+                <div class="infoContainer">
                     <div id="mainContainer" class="dialog_main_info "></div>
                     <div id="statsContainer" class="dialog_stats d_none"></div>
                     <div id="evolutionChainContainer" class="dialog_evo_chain d_none"></div>
+                    <div id="shinyChainContainer" class="dialog_shiny_info d_none"></div>
+                </div>
+
+                <div class="dialog_switches_container dialog_footer">
+                    <button class="dialog_prev_next_button bottom_left_radius">back</button>
+                    <button class="dialog_prev_next_button bottom_right_radius">forward</button>
                 </div>
             </main> 
         </div>
@@ -75,4 +82,5 @@ function closeDialog(){
     const dialogRef = document.getElementById("details");
     dialogRef.close();
     dialogRef.innerHTML ="";
+    dialogRef.classList.add('d_none');
 }

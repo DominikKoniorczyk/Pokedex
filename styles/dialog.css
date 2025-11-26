@@ -1,10 +1,12 @@
 dialog{
-    width: 450px;
+    width: 100dvw;
+    height: 100dvh;
     border: none;
-    border-radius: 16px;
-    background-color: var(--primary-bg-color);
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
-    padding: 0;
     
     &::backdrop{
         background-color: rgba(0, 0, 0, 0.719);
@@ -12,10 +14,28 @@ dialog{
 }
 
 .dialog_body{
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    height: 700px;
+    width: 450px;
+    background-color: var(--primary-bg-color);
+    border-radius: 16px;
+
+    &::before, 
+    &::after{
+        content: "";
+        z-index: -1;
+        position: absolute;
+        inset: -0.2rem;
+        background: conic-gradient(from var(--gradient-angle), red, blue, green);
+        animation: rotation 20s linear infinite;
+        border-radius: 16px;
+    }
+    &::after{
+        filter: blur(3.5rem);
+    }
 
     main{
         min-height: 0;
@@ -47,6 +67,14 @@ dialog{
         height: 100%;
         background-color: #114658;
     }
+
+    .dialog_prev_next_button{
+        border: none;
+        border-radius: 0;
+        width: 50%;
+        height: 100%;
+        background-color: #114658;
+    }
     
     .dialog_switch_button_active{
         border-bottom: 2px red;
@@ -55,6 +83,18 @@ dialog{
         border-right: none;
         border-top: none;
         font-weight: bold;
+    }
+
+    .dialog_footer{
+        height: 43px;
+    }
+
+    .bottom_left_radius{
+        border-bottom-left-radius: 16px;
+    }
+
+    .bottom_right_radius{
+        border-bottom-right-radius: 16px;
     }
 }
 
@@ -115,9 +155,7 @@ dialog{
     }
 }
 
-.lastContainer{
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+.infoContainer{
     background-color: #0c303d;
     height: 240px;
     display: flex;
@@ -146,3 +184,4 @@ dialog{
 .d_none{
     display: none;
 }
+

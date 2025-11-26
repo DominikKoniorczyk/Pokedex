@@ -49,6 +49,9 @@ function changeDialogInfo(id){
         case 2:
             setEvoActive();
             break;
+        case 3: 
+            setShinyActive();
+            break;
     }
 }
 
@@ -56,28 +59,42 @@ function setMainActive(){
     document.getElementById('mainButton').classList.add("dialog_switch_button_active");
     document.getElementById('statsButton').classList.remove('dialog_switch_button_active');
     document.getElementById('evoChainButton').classList.remove('dialog_switch_button_active');
-
+    document.getElementById('shinyButton').classList.remove('dialog_switch_button_active');
     document.getElementById('mainContainer').classList.remove("d_none");
     document.getElementById('statsContainer').classList.add("d_none");
     document.getElementById('evolutionChainContainer').classList.add("d_none");
+    document.getElementById('shinyChainContainer').classList.add("d_none");
 }
 
 function setStatsActive(){
     document.getElementById('mainButton').classList.remove("dialog_switch_button_active");
     document.getElementById('statsButton').classList.add('dialog_switch_button_active');
     document.getElementById('evoChainButton').classList.remove('dialog_switch_button_active');
-
+    document.getElementById('shinyButton').classList.remove('dialog_switch_button_active');
     document.getElementById('mainContainer').classList.add("d_none");
     document.getElementById('statsContainer').classList.remove("d_none");
     document.getElementById('evolutionChainContainer').classList.add("d_none");
+    document.getElementById('shinyChainContainer').classList.add("d_none");
 }
 
 function setEvoActive(){
     document.getElementById('mainButton').classList.remove("dialog_switch_button_active");
     document.getElementById('statsButton').classList.remove('dialog_switch_button_active');
     document.getElementById('evoChainButton').classList.add('dialog_switch_button_active');
-
+    document.getElementById('shinyButton').classList.remove('dialog_switch_button_active');
     document.getElementById('mainContainer').classList.add("d_none");
     document.getElementById('statsContainer').classList.add("d_none");
     document.getElementById('evolutionChainContainer').classList.remove("d_none");
+    document.getElementById('shinyChainContainer').classList.add("d_none");
+}
+
+function setShinyActive(){
+    document.getElementById('mainButton').classList.remove("dialog_switch_button_active");
+    document.getElementById('statsButton').classList.remove('dialog_switch_button_active');
+    document.getElementById('evoChainButton').classList.remove('dialog_switch_button_active');
+    document.getElementById('shinyButton').classList.add('dialog_switch_button_active');
+    document.getElementById('mainContainer').classList.add("d_none");
+    document.getElementById('statsContainer').classList.add("d_none");
+    document.getElementById('evolutionChainContainer').classList.add("d_none");
+    document.getElementById('shinyChainContainer').classList.remove("d_none");
 }
