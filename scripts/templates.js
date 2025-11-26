@@ -1,6 +1,6 @@
 function returnCardTemplate(pokemonData={}, classes, id, imgPath) {
     return /*html*/`
-        <article class = "card" onclick="openDialog(${id})">
+        <article class = "card" onclick="openDialog(${pokemonData.id - 1})">
             <div class = "card_inner">
                 <div class = "card_headline">
                     <h2 class = "inner_headline">#${pokemonData.id}</h2>

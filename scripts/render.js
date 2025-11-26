@@ -14,21 +14,10 @@ function renderNextCards(search){
 }
 
 async function openDialog(id){
+
     const dialogRef = document.getElementById("details");
     const evolutionChain = await getEvolutionChain(id);
-    const evolutionImages = []
-    evolutionChain.forEach(evolution => {
-        evolutionImages.push(evolution.mainImage != null ? evolution.mainImage : "./assets/img/question.png");
-    })
-
-    switch (evolutionChain.length){
-        case 1: console.log("Keine Entwicklungsstufen");
-                break;
-        case 2: console.log("Zwei Stufen");     
-                break;
-        case 3: console.log("Drei Stufen");
-                break;
-    }
+    const evolutionImages = [];
 
 
     dialogRef.innerHTML = /*html*/`
@@ -37,16 +26,53 @@ async function openDialog(id){
                     <h2>#${pokemon[id].id}</h2>
                     <h2 class="dialog_inner_headline">${pokemon[id].name}</h2>
             </header>
-            <div class="dialog_main_img ${pokemon[id].types[0][0].type.name}">
-                <img src="${returnImagePath(pokemon[id])}" alt="" srcset="">
-            </div>
-            <div class="dialog_classes">
-                ${returnClassImages(pokemon[id].types[0][0])}
-            </div>
+            <main>
+                <div class="dialog_main_img ${pokemon[id].types[0][0].type.name}">
+                    <img src="${returnImagePath(pokemon[id])}" alt="" srcset="">
+                </div>
+                
+                <div class="dialog_classes">
+                    ${returnClassImages(pokemon[id].types[0][0])}
+                </div>
+
+                <div class="dialog_switches_container">
+                    <button id="mainButton" class="dialog_switch_button dialog_switch_button_active" onclick="changeDialogInfo(${0})">main</button>
+                    <button id="statsButton" class="dialog_switch_button" onclick="changeDialogInfo(${1})">stats</button>
+                    <button id="evoChainButton" class="dialog_switch_button" onclick="changeDialogInfo(${2})">evo chain</button>
+                </div>
+
+                <div class="lastContainer">
+                    <div id="mainContainer" class="dialog_main_info "></div>
+                    <div id="statsContainer" class="dialog_stats d_none"></div>
+                    <div id="evolutionChainContainer" class="dialog_evo_chain d_none"></div>
+                </div>
+            </main> 
         </div>
     `    
 
+    evolutionChain.forEach((evolution, i) =>{
+        evolutionImages.push(evolution.mainImage != null ? evolution.mainImage : "./assets/img/question.png"); 
+        const chainContainer = document.getElementById('evolutionChainContainer');
+        chainContainer.innerHTML +=
+        /*html*/`
+            <div class="dialog_evo_chain_inner">
+                <img class="dialog_evo_chain_img" src="${evolution.mainImage != null ? evolution.mainImage : "./assets/img/question.png"}" alt="" srcset="">
+                <p>${evolution.name}</p>
+            </div>
+        `;
+        if(i != (evolutionChain.length -1)){
+            chainContainer.innerHTML += /*html*/`
+                <img class="dialog_evo_chain_arrow" src="./assets/img/arrows.png" alt="Arrow to right">
+            `
+        }
+    }) ;
 
 
     dialogRef.showModal();
+}
+
+function closeDialog(){
+    const dialogRef = document.getElementById("details");
+    dialogRef.close();
+    dialogRef.innerHTML ="";
 }

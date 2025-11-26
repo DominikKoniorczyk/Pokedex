@@ -1,24 +1,68 @@
 dialog{
     width: 450px;
-    height: 550px;
     border: none;
-    border-radius: 8px;
+    border-radius: 16px;
     background-color: var(--primary-bg-color);
     color: white;
     padding: 0;
+    
+    &::backdrop{
+        background-color: rgba(0, 0, 0, 0.719);
+    }
 }
 
 .dialog_body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+
+    main{
+        min-height: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    h3{
+        text-align: center;
+    }
+
+    button{
+        border-radius: 20px;
+        width: 40px;
+        height: 40px;               
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dialog_switch_button{
+        border: none;
+        border-radius: 0;
+        width: 33.34%;
+        height: 100%;
+        background-color: #114658;
+    }
+    
+    .dialog_switch_button_active{
+        border-bottom: 2px red;
+        border-style: solid;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        font-weight: bold;
+    }
 }
 
 .dialog_header{
     display: flex;
     justify-content: space-between;
     width: 90%;
-    height: 32px;
+    height: 48px;
     background-color: var(--primary-bg-color);
     padding: 8px;
 }
@@ -29,6 +73,12 @@ dialog{
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    img{
+        height: 240px;
+        width: 240px;
+        margin: 0;
+    }
 }
 
 .dialog_inner_headline{
@@ -39,8 +89,60 @@ dialog{
 
 .dialog_classes{
     width: 100%;
-    height: 40px;
+    height: 54px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.dialog_evo_chain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    .dialog_evo_chain_img{
+        width: 88px;
+        height: 88px;
+        margin: 0;
+    }
+
+    .dialog_evo_chain_arrow{
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        padding-top: 16px;
+    }
+}
+
+.lastContainer{
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: #0c303d;
+    height: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog_evo_chain_inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p{
+        margin-block: 0;
+    }
+}
+
+.dialog_switches_container{
+    display: flex;
+    height: 40px;
+    margin-bottom: -8px;
+    gap: 2px;
+}
+
+.d_none{
+    display: none;
 }

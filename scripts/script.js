@@ -5,6 +5,7 @@ function initWebsite(){
 
 // #region get data from api
 async function getAllPokemon(){
+    toggleLoadingSpinner();
     loadDone = false;
     const response = await fetch(BASE_URL + ".json");
     const responseToJson = await response.json();
@@ -40,12 +41,20 @@ async function formateApiData(data={}, lastElement=bool){
 }
 
 async function getEvolutionChain(id){
+    const outPut = []
     const response = await fetch(pokemon[id].additionals.evolution_chain.url);
     const responseToJson = await response.json();
     const firstPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.species.name))[0];
-    const secondPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.evolves_to[0].species.name))[0];
-    const thirdPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.evolves_to[0].evolves_to[0].species.name))[0];
-    return [firstPokemon, secondPokemon, thirdPokemon];    
+    outPut.push(firstPokemon);
+    if(responseToJson.chain.evolves_to.length > 0){
+        const secondPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.evolves_to[0].species.name))[0];
+        outPut.push(secondPokemon);
+        if(responseToJson.chain.evolves_to[0].evolves_to.length > 0){
+            const thirdPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.evolves_to[0].evolves_to[0].species.name))[0];
+            outPut.push(thirdPokemon);
+        }
+    } 
+    return outPut;    
 }
 
 function sortPokemonById(){
@@ -80,5 +89,13 @@ async function searchForPokemon(searchString){
         renderNextCards(false);
     } else{
         renderNextCards(true);
+    }
+}
+
+function toggleLoadingSpinner(){
+    if(!isLoading){
+        document.getElementById('loadingSpinner').showModal();
+    } else {
+        document.getElementById('loadingSpinner').close();
     }
 }

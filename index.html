@@ -19,7 +19,7 @@
 
     <title>Pokedex</title>
 </head>
-<body onload="initWebsite()">
+<body onload="initWebsite()" onclick="closeDialog()">
     <header>
         <div class = "inner head">
             <a href="index.html"><img class="logo" src="./assets/img/pokedex_logo.gif" alt="Pokedex logo"></a>
@@ -39,6 +39,11 @@
 
     <dialog id="details">
 
+    </dialog>
+
+    <dialog class="loading_container" id="loadingSpinner">
+        <img class="loader" src="./assets/img/pokeball.png"></div>
+        <h2>Loading ...</h2>
     </dialog>
 
     <footer>
