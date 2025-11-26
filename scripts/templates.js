@@ -65,3 +65,18 @@ function returnPokemonInfoTemplate(id){
         </div>
     `;
 }
+
+function returnEvoChainContainer(evolution){
+    return /*html*/`
+        <div class="dialog_evo_chain_inner">
+                <img class="dialog_evo_chain_img" src="${evolution.mainImage != null ? evolution.mainImage : "./assets/img/question.png"}" alt="" srcset="">
+                <p>${evolution.name}</p>
+            </div>
+    `
+}
+
+function returnEvoChainArrow(){
+    return /*html*/`
+        <img class="dialog_evo_chain_arrow" src="./assets/img/arrows.png" alt="Arrow to right">
+    `;
+}
