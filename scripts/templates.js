@@ -26,3 +26,42 @@ function returnClassImages(data){
         </button>
     `;
 }
+
+function returnPokemonInfoTemplate(id){
+    return /*html*/`
+        <div class="dialog_body">
+            <header class="dialog_header">
+                    <h2>#${pokemon[id].id}</h2>
+                    <h2 class="dialog_inner_headline">${pokemon[id].name}</h2>
+            </header>
+            <main>
+                <div class="dialog_main_img ${pokemon[id].types[0][0].type.name}">
+                    <img src="${returnImagePath(pokemon[id])}" alt="" srcset="">
+                </div>
+                
+                <div class="dialog_classes">
+                    ${returnClassImages(pokemon[id].types[0][0])}
+                </div>
+
+                <div class="dialog_switches_container">
+                    <button id="mainButton" class="dialog_switch_button dialog_switch_button_active" onclick="changeDialogInfo(${0})">main</button>
+                    <button id="statsButton" class="dialog_switch_button" onclick="changeDialogInfo(${1})">stats</button>
+                    <button id="evoChainButton" class="dialog_switch_button" onclick="changeDialogInfo(${2})">evo chain</button>
+                    <button id="shinyButton" class="dialog_switch_button" onclick="changeDialogInfo(${3})">shiny</button>
+                </div>
+
+                <div class="infoContainer">
+                    <div id="mainContainer" class="dialog_main_info "></div>
+                    <div id="statsContainer" class="dialog_stats d_none"></div>
+                    <div id="evolutionChainContainer" class="dialog_evo_chain d_none"></div>
+                    <div id="shinyChainContainer" class="dialog_shiny_info d_none"></div>
+                </div>
+
+                <div class="dialog_switches_container dialog_footer">
+                    <button class="dialog_prev_next_button bottom_left_radius" onclick="getNextDialog(${id - 1})">back</button>
+                    <button class="dialog_prev_next_button bottom_right_radius"  onclick="getNextDialog(${id + 1})">forward</button>
+                </div>
+            </main> 
+        </div>
+    `;
+}
