@@ -6,11 +6,11 @@ function renderNextCards(search){
         let pokemonClasses = "";
         if(pokemonToRender[i].types.length > 0){
             pokemonToRender[i].types[0].forEach(classes => {
-                pokemonClasses += returnClassImages(classes);   
-            });          
+                pokemonClasses += returnClassImages(classes);});          
         }        
         BODY_ELEMENT.innerHTML += returnCardTemplate(pokemonToRender[i], pokemonClasses, i, returnImagePath(pokemonToRender[i]));        
     }
+    toggleLoadingSpinner();  
 }
 
 async function openDialog(id){

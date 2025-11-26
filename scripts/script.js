@@ -92,10 +92,14 @@ async function searchForPokemon(searchString){
     }
 }
 
-function toggleLoadingSpinner(){
+function toggleLoadingSpinner(){    
+    const loadingScreen = document.getElementById('loadingSpinner');
+    loadingScreen.classList.toggle('d_none');
     if(!isLoading){
-        document.getElementById('loadingSpinner').showModal();
+        loadingScreen.showModal();
+        isLoading = true;
     } else {
-        document.getElementById('loadingSpinner').close();
+        loadingScreen.close();
+        isLoading = false;
     }
 }

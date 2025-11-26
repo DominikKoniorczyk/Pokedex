@@ -12,7 +12,6 @@ function addEventListener(){
 
 function searchPokemon(){
     const INPUT_REF = document.getElementById('searchField');
-    
     searchForPokemon(document.getElementById('searchField').value);    
 }
 
@@ -32,7 +31,8 @@ function checkElementIsInView(scrollYPosition)
         const positionY = (((renderedPokemon - 25) / elementsPerRow) * 300) - window.innerHeight;
 
         if(positionY <= scrollYPosition){
-            renderNextCards();         
+            toggleLoadingSpinner();  
+            renderNextCards();       
         }
     }
 }

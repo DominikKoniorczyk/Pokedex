@@ -27,7 +27,7 @@
                 <div class="auto_load">
                     <input class="checkbox" type="checkbox" name="Auto Reload" id="autoReload" onchange="changeReloadMethod()">Automatisches laden aktivieren 
                 </div>
-                <button onclick="renderNextCards()">Mehr Pokemon laden</button>
+                <button onclick="toggleLoadingSpinner(), renderNextCards()">Mehr Pokemon laden</button>
             </div>
             <input id="searchField" class="search_field" type="text" placeholder="Nach Pokemon suchen..." onkeyup="searchPokemon(false)">
         </div>
@@ -41,7 +41,7 @@
 
     </dialog>
 
-    <dialog class="loading_container" id="loadingSpinner">
+    <dialog class="loading_container d_none" id="loadingSpinner">
         <img class="loader" src="./assets/img/pokeball.png"></div>
         <h2>Loading ...</h2>
     </dialog>
