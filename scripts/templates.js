@@ -36,7 +36,7 @@ function returnPokemonInfoTemplate(id){
             </header>
             <main>
                 <div class="dialog_main_img ${pokemon[id].types[0][0].type.name}">
-                    <img src="${returnImagePath(pokemon[id])}" alt="" srcset="">
+                    <img src="${returnGifPath(pokemon[id])}" alt="" srcset="">
                 </div>
                 
                 <div class="dialog_classes">
@@ -54,7 +54,7 @@ function returnPokemonInfoTemplate(id){
                     <div id="mainContainer" class="dialog_main_info "></div>
                     <div id="statsContainer" class="dialog_stats d_none"></div>
                     <div id="evolutionChainContainer" class="dialog_evo_chain d_none"></div>
-                    <div id="shinyChainContainer" class="dialog_shiny_info d_none"></div>
+                    <div id="shinyChainContainer" class="dialog_shiny_info d_none"><img class="shiny_img" src="${returnShinyImg(pokemon[id])}" alt=""></div>
                 </div>
 
                 <div class="dialog_switches_container dialog_footer">
@@ -79,4 +79,10 @@ function returnEvoChainArrow(){
     return /*html*/`
         <img class="dialog_evo_chain_arrow" src="./assets/img/arrows.png" alt="Arrow to right">
     `;
+}
+
+function returnResultTemplate(result){
+    return /*html*/`
+        <button class="result_button"onclick="openDialog(${(result.id - 1)})"> <p>#${result.id}</p> <p>${result.name}</p></button>
+    `
 }

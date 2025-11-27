@@ -79,9 +79,3 @@
   border-radius: 24px;
 }
 
-img {
-  width: 140px;
-  filter: drop-shadow(8px 8px 12px var(--shadow-color));
-  height: 140px;
-  margin: 16px;
-}

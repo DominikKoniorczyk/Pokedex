@@ -1,0 +1,18 @@
+.search_area{
+    position: fixed;
+    top: 190px;
+    left: 50;
+    .search_results{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .result_button{
+        height: 32px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

@@ -40,7 +40,7 @@ body{
 }
 
 main{
-    min-height: calc(100dvh - 240px - 32px);
+    min-height: calc(100dvh - 320px - 32px);
 }
 
 a{
@@ -62,7 +62,7 @@ h2{
 }
 
 header{
-    height: 120px;
+    height: 200px;
     width: 100%;
     background-color: var(--secondary-bg-color);
     display: flex;
@@ -111,4 +111,11 @@ body:has(dialog#details[open]) {
 
 body:has(dialog#loadingSpinner[open]) {
     overflow: hidden;
+}
+
+img {
+  width: 140px;
+  filter: drop-shadow(8px 8px 12px var(--shadow-color));
+  height: 140px;
+  margin: 16px;
 }

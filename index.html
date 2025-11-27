@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./styles/styles.css">
     <link rel="stylesheet" href="./styles/types.css">
     <link rel="stylesheet" href="./styles/dialog.css">
+    <link rel="stylesheet" href="./styles/elements.css">
 
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/db.js"></script>
@@ -21,31 +22,27 @@
 </head>
 <body onload="initWebsite()" onclick="closeDialog()">
     <header>
-        <div class = "inner head">
-            <a href="index.html"><img class="logo" src="./assets/img/pokedex_logo.gif" alt="Pokedex logo"></a>
-            <div class="middle_header">
+        <div class = "inner head margin_minus_fifty">
+            <a class="logoImg" href="index.html"><img class="logo" src="./assets/img/pokedex_logo.gif" alt="Pokedex logo"></a>
+            <!-- <div class="middle_header">
                 <div class="auto_load">
                     <input class="checkbox" type="checkbox" name="Auto Reload" id="autoReload" onchange="changeReloadMethod()">Automatisches laden aktivieren 
                 </div>
-                <button onclick="toggleLoadingSpinner(), renderNextCards()">Mehr Pokemon laden</button>
+            </div> -->
+            <div class="search_area margin_minus_fifty">
+                <input id="searchField" class="search_field" type="text" placeholder="Search a pokemon..." onkeyup="searchPokemon(false)">
+                <div id="searchResultContainer" class="search_results"></div>
             </div>
-            <input id="searchField" class="search_field" type="text" placeholder="Nach Pokemon suchen..." onkeyup="searchPokemon(false)">
         </div>
     </header>
-
-    <main id="card_content" class="inner">
-
-    </main>
-
+    <main id="card_content" class="inner"></main>
+    <button onclick="toggleLoadingSpinner(), renderNextCards()">Mehr Pokemon laden</button>
     <dialog id="details" class="d_none">
-
     </dialog>
-
     <dialog class="loading_container d_none" id="loadingSpinner">
         <img class="loader" src="./assets/img/pokeball.png"></div>
         <h2>Loading ...</h2>
     </dialog>
-
     <footer>
         <a href="impressum.html">Impressum</a>
     </footer>    

@@ -9,9 +9,8 @@ async function getAllPokemon(){
     loadDone = false;
     const response = await fetch(BASE_URL + ".json");
     const responseToJson = await response.json();
-    responseToJson.results.forEach(result => {
-        const lastElement = responseToJson.results.findLast((element) => element) == result;
-        fetchApiData(result, lastElement);
+    responseToJson.results.forEach(result => {        
+        fetchApiData(result);
     });
 }
 
@@ -21,40 +20,26 @@ async function returnAdditionalInfo(responseData={}){
     return responseToJson;
 }
 
-async function fetchApiData(responseData, lastElement){
+async function fetchApiData(responseData){
     const mainInfoUrl = responseData.url; 
     const mainInfo = await fetch(mainInfoUrl);
     const mainInfoToJson = await mainInfo.json();    
-    const additionalInformation = await returnAdditionalInfo(mainInfoToJson);
-    const Data = {id: mainInfoToJson.id, name: mainInfoToJson.name.charAt(0).toUpperCase() + mainInfoToJson.name.slice(1), nameLowerCase: mainInfoToJson.name, mainImage: mainInfoToJson.sprites.other.home.front_default, types: [mainInfoToJson.types], weight: mainInfoToJson.weight, stats: mainInfoToJson.stats, additionals: additionalInformation};
-    formateApiData(Data, lastElement);
-}
-
-async function formateApiData(data={}, lastElement=bool){      
-    if(pokemon.findIndex(element => element.id === data.id) === -1){  
-        pokemon.push(data);
-        loadDone = lastElement;
-        if(loadDone){
+    const additionalInformation = await returnAdditionalInfo(mainInfoToJson);    
+    if(mainInfoToJson.id < 2000){
+        const Data = {id: mainInfoToJson.id, name: mainInfoToJson.name.charAt(0).toUpperCase() + mainInfoToJson.name.slice(1), nameLowerCase: mainInfoToJson.name, mainImage: mainInfoToJson.sprites.other.home.front_default, sprites: mainInfoToJson.sprites, types: [mainInfoToJson.types], weight: mainInfoToJson.weight, stats: mainInfoToJson.stats, additionals: additionalInformation};
+        formateApiData(Data);
+    } else {
+        if(!loadDone){
+            loadDone = true;
             sortPokemonById();
         }
-    };
+   }
 }
 
-async function getEvolutionChain(id){
-    const outPut = []
-    const response = await fetch(pokemon[id].additionals.evolution_chain.url);
-    const responseToJson = await response.json();
-    const firstPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.species.name))[0];
-    outPut.push(firstPokemon);
-    if(responseToJson.chain.evolves_to.length > 0){
-        const secondPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.evolves_to[0].species.name))[0];
-        outPut.push(secondPokemon);
-        if(responseToJson.chain.evolves_to[0].evolves_to.length > 0){
-            const thirdPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.evolves_to[0].evolves_to[0].species.name))[0];
-            outPut.push(thirdPokemon);
-        }
-    } 
-    return outPut;    
+async function formateApiData(data={}){      
+    if(pokemon.findIndex(element => element.id === data.id) === -1){  
+        pokemon.push(data);
+    };
 }
 
 function sortPokemonById(){
@@ -69,6 +54,23 @@ function sortPokemonById(){
     pokemonToRender = pokemon;
     renderNextCards();
 }
+
+async function getEvolutionChain(id){
+    const outPut = []
+    const response = await fetch(pokemon[id].additionals.evolution_chain.url);
+    const responseToJson = await response.json();
+    const firstPokemon = pokemon.filter(poke => poke.nameLowerCase.includes(responseToJson.chain.species.name))[0];
+    outPut.push(firstPokemon);
+    if(responseToJson.chain.evolves_to.length > 0){
+        const secondPokemon = pokemon.filter(poke => poke.nameLowerCase === (responseToJson.chain.evolves_to[0].species.name))[0];
+        outPut.push(secondPokemon);
+        if(responseToJson.chain.evolves_to[0].evolves_to.length > 0){
+            const thirdPokemon = pokemon.filter(poke => poke.nameLowerCase === (responseToJson.chain.evolves_to[0].evolves_to[0].species.name))[0];
+            outPut.push(thirdPokemon);
+        }
+    } 
+    return outPut;    
+}
 // #endregion
 
 function returnImagePath(pokemon){
@@ -79,16 +81,30 @@ function returnImagePath(pokemon){
     }
 }
 
-async function searchForPokemon(searchString){
-    pokemonToRender = await pokemon.filter(pokemon => pokemon.id == parseInt(searchString) || pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString));
-
-    renderedPokemon = 0;
-    const BODY_ELEMENT = document.getElementById('card_content');
-    BODY_ELEMENT.innerHTML = "";
-    if(searchString.length == 0){
-        renderNextCards(false);
+function returnGifPath(pokemon){
+    if(pokemon.sprites.other.showdown.front_default != null)
+    {
+        return pokemon.sprites.other.showdown.front_default;
     } else{
-        renderNextCards(true);
+        return returnImagePath(pokemon);
+    }
+}
+
+function returnShinyImg(pokemon){
+    if(pokemon.sprites.front_shiny != null){
+        return pokemon.sprites.front_shiny;
+    } else {
+        return "./assets/img/question.png";
+    }
+}
+
+async function searchForPokemon(searchString){
+    const searchResultContainer = document.getElementById('searchResultContainer');
+    searchResultContainer.innerHTML = "";
+    if(searchString != ""){
+        pokemonToRender = await pokemon.filter(pokemon => pokemon.id == parseInt(searchString) || pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString));        pokemonToRender.forEach(result => {
+            searchResultContainer.innerHTML += returnResultTemplate(result);
+        })
     }
 }
 

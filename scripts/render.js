@@ -1,6 +1,6 @@
 function renderNextCards(search){
     const BODY_ELEMENT = document.getElementById('card_content');
-    let end = search ? pokemonToRender.length : renderedPokemon + 50;
+    let end = search ? pokemonToRender.length : renderedPokemon + 40;
     for (let i = renderedPokemon; i < end; i++) {
         renderedPokemon++;
         let pokemonClasses = "";
@@ -20,6 +20,7 @@ async function openDialog(id){
     dialogRef.innerHTML = returnPokemonInfoTemplate(id);
     renderEvolutionChain(evolutionChain);
     dialogRef.showModal();
+    console.log(pokemon[id]);    
 }
 
 async function renderEvolutionChain(evolutionChain){
