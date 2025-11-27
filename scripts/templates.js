@@ -4,7 +4,7 @@ function returnCardTemplate(pokemonData={}, classes, id, imgPath) {
             <div class = "card_inner">
                 <div class = "card_headline">
                     <h2 class = "inner_headline">#${pokemonData.id}</h2>
-                    <h2 class = "inner_headline">${pokemonData.name}</h2>
+                    <h2 class = "inner_headline">${pokemonData.additionals.names[langID].name}</h2>
                 </div>
                 <div class="pokemon_img_container ${pokemonData.types[0][0].type.name}">
                     <img src=${imgPath} alt="" srcset="">
