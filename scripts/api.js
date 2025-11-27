@@ -86,11 +86,14 @@ async function getPokemonAbilities(id){
     pokemon[id].abilities.forEach(async ability => {
         const response = await fetch(ability.ability.url);
         const responseToJson = await response.json();
+        let abilityName = responseToJson.names.filter(lang => lang.language.name === langString);  
         if(abilityNames === ""){
-            abilityNames = responseToJson.names.filter(lang => lang.language.name === langString)[0].name;                
-        } else {
-            abilityNames += ", " + responseToJson.names.filter(lang => lang.language.name === langString)[0].name; 
+            abilityNames = abilityName[0].name;
+        }else {
+            abilityNames += ", " + abilityName[0].name; 
         }
     });
+    
+    console.log("3" + abilityNames);
     return abilityNames;
 }
