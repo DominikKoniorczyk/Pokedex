@@ -20,7 +20,9 @@ async function fetchApiData(responseData){
     const mainInfoToJson = await mainInfo.json();    
     const additionalInformation = await returnAdditionalInfo(mainInfoToJson);    
     if(mainInfoToJson.id < 2000){
-        const Data = {id: mainInfoToJson.id, name: mainInfoToJson.name.charAt(0).toUpperCase() + mainInfoToJson.name.slice(1), nameLowerCase: mainInfoToJson.name, species: mainInfoToJson.species, mainImage: mainInfoToJson.sprites.other.home.front_default, sprites: mainInfoToJson.sprites, types: [mainInfoToJson.types], weight: mainInfoToJson.weight, stats: mainInfoToJson.stats, additionals: additionalInformation};
+        console.log(mainInfoToJson);
+        
+        const Data = {id: mainInfoToJson.id, name: mainInfoToJson.name.charAt(0).toUpperCase() + mainInfoToJson.name.slice(1), nameLowerCase: mainInfoToJson.name, species: mainInfoToJson.species, mainImage: mainInfoToJson.sprites.other.home.front_default, sprites: mainInfoToJson.sprites, types: [mainInfoToJson.types], weight: mainInfoToJson.weight, height: mainInfoToJson.height, stats: mainInfoToJson.stats, additionals: additionalInformation};
         formateApiData(Data);
     } else {
         if(!loadDone){
@@ -77,7 +79,6 @@ async function getPokemonDescription(id){
         descriptionText = descriptionAsJson.flavor_text_entries[index].flavor_text;
         index++;
     }
-    console.log(descriptionText);
-    
-    return descriptionText; 
+    let newResult = descriptionText.replace(/\f/i, " ");
+    return newResult; 
 }

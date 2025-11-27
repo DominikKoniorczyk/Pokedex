@@ -34,7 +34,7 @@ async function searchForPokemon(searchString){
     if(searchString != ""){
         pokemonToRender = await pokemon.filter(pokemon => pokemon.id == parseInt(searchString) || pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString));        
         pokemonToRender.forEach(result => {
-            searchResultContainer.innerHTML += returnResultTemplate(result);
+            searchResultContainer.innerText += returnResultTemplate(Result);
         })
     }
 }

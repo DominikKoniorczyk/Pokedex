@@ -33,7 +33,7 @@ function returnPokemonInfoTemplate(id){
         <div class="dialog_body">
             <header class="dialog_header">
                     <h2>#${pokemon[id].id}</h2>
-                    <h2 class="dialog_inner_headline">${pokemon[id].name}</h2>
+                    <h2 class="dialog_inner_headline">${pokemon[id].additionals.names[langID].name}</h2>
             </header>
             <main>
                 <div class="dialog_main_img ${pokemon[id].types[0][0].type.name}">
@@ -85,7 +85,10 @@ function returnEvoChainArrow(){
 function returnDialogMainTemplate(description, id){
     return /*html*/`
         <p class="dialog_description">${description}</p>
-        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].species}: </p><p>${pokemon[id].species.name}</p></div>
+        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].species}: </p><p>${pokemon[id].additionals.names[langID].name}</p></div>
+        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].weight}: </p><p>${pokemon[id].weight} kg</p></div>
+        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].height}: </p><p>${pokemon[id].height * 10} cm</p></div>
+        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].abilities}: </p><p>${pokemon[id].height * 10} cm</p></div>
     `
 }
 

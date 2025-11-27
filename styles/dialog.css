@@ -108,17 +108,9 @@ dialog{
         border-bottom-right-radius: 16px;
     }
 
-    .dialog_main_info{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
     .dialog_description{
         font-size: 14px;
         width: 90%;
-        text-align: center;
     }
 
     .dialog_list{
@@ -214,6 +206,13 @@ dialog{
     width: 200px;
     height: 200px
     
+}
+
+.dialog_main_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .d_none{
