@@ -18,6 +18,7 @@ async function openDialog(id){
     const evolutionChain = await getEvolutionChain(id);
     dialogRef.classList.remove('d_none');
     dialogRef.innerHTML = returnPokemonInfoTemplate(id);
+    renderMainPage(id);
     renderEvolutionChain(evolutionChain);
     dialogRef.showModal();
 }
@@ -34,11 +35,18 @@ async function renderEvolutionChain(evolutionChain){
     }) ;
 }
 
+async function renderMainPage(id){
+    const mainRef = document.getElementById('mainContainer');
+    const description = await getPokemonDescription(id);
+    mainRef.innerHTML = returnDialogMainTemplate(description, id);
+}
+
 async function refreshDialog(id){
     const dialogRef = document.getElementById("details");
     const evolutionChain = await getEvolutionChain(id);
     dialogRef.classList.remove('d_none');
     dialogRef.innerHTML = returnPokemonInfoTemplate(id);
+    renderMainPage(id);
     renderEvolutionChain(evolutionChain);    
 }
 

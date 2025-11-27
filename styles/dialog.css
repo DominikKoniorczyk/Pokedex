@@ -107,6 +107,26 @@ dialog{
     .bottom_right_radius{
         border-bottom-right-radius: 16px;
     }
+
+    .dialog_main_info{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dialog_description{
+        font-size: 14px;
+        width: 90%;
+        text-align: center;
+    }
+
+    .dialog_list{
+        display:flex;
+        width: 90%;
+        gap: 8px;
+        font-size: 12px;
+    }
 }
 
 .dialog_header{

@@ -82,6 +82,13 @@ function returnEvoChainArrow(){
     `;
 }
 
+function returnDialogMainTemplate(description, id){
+    return /*html*/`
+        <p class="dialog_description">${description}</p>
+        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].species}: </p><p>${pokemon[id].species.name}</p></div>
+    `
+}
+
 function returnResultTemplate(result){
     return /*html*/`
         <button class="result_button"onclick="openDialog(${(result.id - 1)})"> <p>#${result.id}</p> <p>${result.name}</p></button>

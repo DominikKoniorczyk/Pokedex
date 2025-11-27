@@ -77,5 +77,7 @@ async function getPokemonDescription(id){
         descriptionText = descriptionAsJson.flavor_text_entries[index].flavor_text;
         index++;
     }
+    console.log(descriptionText);
+    
     return descriptionText; 
 }
