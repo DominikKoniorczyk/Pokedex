@@ -20,9 +20,7 @@ async function fetchApiData(responseData){
     const mainInfoToJson = await mainInfo.json();    
     const additionalInformation = await returnAdditionalInfo(mainInfoToJson);    
     if(mainInfoToJson.id < 2000){
-        console.log(mainInfoToJson);
-        
-        const Data = {id: mainInfoToJson.id, name: mainInfoToJson.name.charAt(0).toUpperCase() + mainInfoToJson.name.slice(1), nameLowerCase: mainInfoToJson.name, species: mainInfoToJson.species, mainImage: mainInfoToJson.sprites.other.home.front_default, sprites: mainInfoToJson.sprites, types: [mainInfoToJson.types], weight: mainInfoToJson.weight, height: mainInfoToJson.height, stats: mainInfoToJson.stats, additionals: additionalInformation};
+        const Data = {id: mainInfoToJson.id, name: mainInfoToJson.name.charAt(0).toUpperCase() + mainInfoToJson.name.slice(1), nameLowerCase: mainInfoToJson.name, species: mainInfoToJson.species, mainImage: mainInfoToJson.sprites.other.home.front_default, sprites: mainInfoToJson.sprites, types: [mainInfoToJson.types], weight: mainInfoToJson.weight, height: mainInfoToJson.height, stats: mainInfoToJson.stats, additionals: additionalInformation, abilities: mainInfoToJson.abilities};
         formateApiData(Data);
     } else {
         if(!loadDone){
@@ -81,4 +79,18 @@ async function getPokemonDescription(id){
     }
     let newResult = descriptionText.replace(/\f/i, " ");
     return newResult; 
+}
+
+async function getPokemonAbilities(id){
+    let abilityNames = "";
+    pokemon[id].abilities.forEach(async ability => {
+        const response = await fetch(ability.ability.url);
+        const responseToJson = await response.json();
+        if(abilityNames === ""){
+            abilityNames = responseToJson.names.filter(lang => lang.language.name === langString)[0].name;                
+        } else {
+            abilityNames += ", " + responseToJson.names.filter(lang => lang.language.name === langString)[0].name; 
+        }
+    });
+    return abilityNames;
 }

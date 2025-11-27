@@ -38,7 +38,8 @@ async function renderEvolutionChain(evolutionChain){
 async function renderMainPage(id){
     const mainRef = document.getElementById('mainContainer');
     const description = await getPokemonDescription(id);
-    mainRef.innerHTML = returnDialogMainTemplate(description, id);
+    const abilities = await getPokemonAbilities(id);
+    mainRef.innerHTML = returnDialogMainTemplate(description, id, abilities);
 }
 
 async function refreshDialog(id){

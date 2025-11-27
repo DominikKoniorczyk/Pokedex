@@ -82,13 +82,13 @@ function returnEvoChainArrow(){
     `;
 }
 
-function returnDialogMainTemplate(description, id){
+function returnDialogMainTemplate(description, id, abilities){
     return /*html*/`
         <p class="dialog_description">${description}</p>
         <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].species}: </p><p>${pokemon[id].additionals.names[langID].name}</p></div>
         <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].weight}: </p><p>${pokemon[id].weight} kg</p></div>
         <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].height}: </p><p>${pokemon[id].height * 10} cm</p></div>
-        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].abilities}: </p><p>${pokemon[id].height * 10} cm</p></div>
+        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].abilities}: </p><p>${abilities}</p></div>
     `
 }
 
