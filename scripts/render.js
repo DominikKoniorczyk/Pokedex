@@ -20,7 +20,6 @@ async function openDialog(id){
     dialogRef.innerHTML = returnPokemonInfoTemplate(id);
     renderEvolutionChain(evolutionChain);
     dialogRef.showModal();
-    console.log(pokemon[id]);    
 }
 
 async function renderEvolutionChain(evolutionChain){

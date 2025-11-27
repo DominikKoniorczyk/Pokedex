@@ -28,6 +28,7 @@ function returnClassImages(data){
 }
 
 function returnPokemonInfoTemplate(id){
+    getPokemonDescription(id);
     return /*html*/`
         <div class="dialog_body">
             <header class="dialog_header">

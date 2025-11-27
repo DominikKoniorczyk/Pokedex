@@ -6,4 +6,5 @@ let autoReload = false;
 let renderedPokemon = 0;
 let isLoading = false;
 let langID = 8;
+let langString = "en";
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=50000&offset=";
