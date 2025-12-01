@@ -18,7 +18,6 @@ const TRANSLATION_TEXTS = {
         height: "Height",
         abilities: "Abilities",
         search: "Search a Pokemon",
-
         back: "back",
         forward: "forward",
         main: "main",
@@ -36,7 +35,7 @@ const TRANSLATION_TEXTS = {
         forward: "forwärts",
         main: "Haupt",
         stats: "Stats",
-        evo_chain: "Evo Kette",
+        evo_chain: "Evolutionen",
         shiny: "Gläzend"
     }
 }

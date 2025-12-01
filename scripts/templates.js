@@ -47,10 +47,10 @@ function returnPokemonInfoTemplate(id){
                 </div>
 
                 <div class="dialog_switches_container">
-                    <button id="mainButton" class="dialog_switch_button dialog_switch_button_active" onclick="changeDialogInfo(${0})">main</button>
-                    <button id="statsButton" class="dialog_switch_button" onclick="changeDialogInfo(${1})">stats</button>
-                    <button id="evoChainButton" class="dialog_switch_button" onclick="changeDialogInfo(${2})">evo chain</button>
-                    <button id="shinyButton" class="dialog_switch_button" onclick="changeDialogInfo(${3})">shiny</button>
+                    <button id="mainButton" class="dialog_switch_button dialog_switch_button_active" onclick="changeDialogInfo(${0})">${TRANSLATION_TEXTS[langString].main}</button>
+                    <button id="statsButton" class="dialog_switch_button" onclick="changeDialogInfo(${1})">${TRANSLATION_TEXTS[langString].stats}</button>
+                    <button id="evoChainButton" class="dialog_switch_button" onclick="changeDialogInfo(${2})">${TRANSLATION_TEXTS[langString].evo_chain}</button>
+                    <button id="shinyButton" class="dialog_switch_button" onclick="changeDialogInfo(${3})">${TRANSLATION_TEXTS[langString].shiny}</button>
                 </div>
 
                 <div class="infoContainer">
@@ -61,8 +61,8 @@ function returnPokemonInfoTemplate(id){
                 </div>
 
                 <div class="dialog_switches_container dialog_footer">
-                    <button class="dialog_prev_next_button bottom_left_radius" onclick="getNextDialog(${id - 1})">back</button>
-                    <button class="dialog_prev_next_button bottom_right_radius"  onclick="getNextDialog(${id + 1})">forward</button>
+                    <button class="dialog_prev_next_button bottom_left_radius" onclick="getNextDialog(${id - 1})">${TRANSLATION_TEXTS[langString].back}</button>
+                    <button class="dialog_prev_next_button bottom_right_radius"  onclick="getNextDialog(${id + 1})">${TRANSLATION_TEXTS[langString].forward}</button>
                 </div>
             </main> 
         </div>
@@ -102,7 +102,7 @@ function returnDialogMainTemplate(description, id){
 /** Returns a result button for the search results. Insert name and id of the pokemon on the result button. */
 function returnResultTemplate(result){
     return /*html*/`
-        <button class="result_button"onclick="openDialog(${(result.id - 1)})"> <p>#${result.id}</p> <p>${result.name}</p></button>
+        <button class="result_button"onclick="openDialog(${(result.id - 1)})"> <p>#${result.id}</p> <p>${result.additionals.names[langID].name}</p></button>
     `
 }
 

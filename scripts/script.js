@@ -43,9 +43,9 @@ async function searchForPokemon(searchString){
     const searchResultContainer = document.getElementById('searchResultContainer');
     searchResultContainer.innerHTML = "";
     if(searchString != ""){
-        pokemonToRender = await pokemon.filter(pokemon => pokemon.id == parseInt(searchString) || pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString));        
+        pokemonToRender = await pokemon.filter(pokemon => pokemon.id == parseInt(searchString) || pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString) || pokemon.additionals.names[5].name.includes(searchString));        
         pokemonToRender.forEach(result => {
-            searchResultContainer.innerText += returnResultTemplate(Result);
+            searchResultContainer.innerHTML += returnResultTemplate(result);
         })
     }
 }
@@ -61,4 +61,17 @@ function toggleLoadingSpinner(){
         loadingScreen.close();
         isLoading = false;
     }
+}
+
+/** Change language of the whole site via options. */
+function changeLanguage(languageID){
+    const searchFieldRef = document.getElementById('searchField');
+    const mainContainer = document.getElementById('card_content');
+    mainContainer.innerHTML = "";
+    langID = languageID;
+    langString = langID == 8 ? "en" : "de";
+    renderedPokemon = 0;
+    toggleLoadingSpinner();
+    renderNextCards()
+    searchFieldRef.setAttribute('placeholder', TRANSLATION_TEXTS[langString].search); 
 }

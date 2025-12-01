@@ -1,7 +1,7 @@
 /** Renders the next 40 Pokémon cards on the main page. The limit is increased by 40. */
 function renderNextCards(search){
     const BODY_ELEMENT = document.getElementById('card_content');
-    let end = search ? pokemonToRender.length : renderedPokemon + 40;
+    let end = renderedPokemon + 40;
     for (let i = renderedPokemon; i < end; i++) {
         renderedPokemon++;
         let pokemonClasses = "";
