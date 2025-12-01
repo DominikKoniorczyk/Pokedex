@@ -13,8 +13,8 @@ function addEventListener(){
 
 /** Function for searching for a specific Pokémon. Retrieves the value of the input field for the search and passes it on to the “searchForPokemon” function. */
 function searchPokemon(){
-    const INPUT_REF = document.getElementById('searchField');
-    searchForPokemon(document.getElementById('searchField').value);    
+    const inputRef = document.getElementById('searchField');
+    searchForPokemon(inputRef.value);    
 }
 
 /** Function to change the reload function of the page. Checks the value of the checkbox with the ID “autoReload” and switches between automatic and manual loading. */

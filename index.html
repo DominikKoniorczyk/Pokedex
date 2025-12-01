@@ -15,6 +15,7 @@
     <link rel="icon" type="image/x-icon" href="./assets/img/pokeball.ico">
 
     <script src="./scripts/templates.js"></script>
+    <script src="./scripts/settings.js"></script>
     <script src="./scripts/db.js"></script>
     <script src="./scripts/events.js"></script>
     <script src="./scripts/render.js"></script>
@@ -36,7 +37,10 @@
             <!-- <button onclick="changeLanguage(5)"><img src="./assets/img/arrows.png" alt="" srcset=""></button> -->
 
             <div class="search_area margin_minus_fifty">
-                <input id="searchField" class="search_field" type="text" placeholder="Search a pokemon..." onkeyup="searchPokemon(false)">
+                <div class="header_settings">
+                    <input id="searchField" class="search_field" type="text" placeholder="Search a Pokemon by id or name..." onkeyup="searchPokemon(false)">
+                    <button class="settings_button" onclick="openSettingsMenu()"><img class="settings_img" src="./assets/img/settings.png" alt="Settingssymbol"></button>
+                </div>
                 <div id="searchResultContainer" class="search_results"></div>
             </div>
         </div>

@@ -1,7 +1,6 @@
 .search_area{
     position: fixed;
     top: 190px;
-    left: 50;
     .search_results{
         display: flex;
         flex-direction: column;
@@ -14,5 +13,33 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+    }
+}
+
+.header_settings{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    gap: 8px;
+}
+
+.settings_button{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+    img{
+        width: 32px;
+        height: 32px;
+        margin: 0;
+    }
+
+    &:hover{
+        transition: all 0.3s;
+        transform: scale(1.2);
     }
 }

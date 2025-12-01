@@ -42,13 +42,16 @@ function returnShinyImg(pokemon){
 async function searchForPokemon(searchString){
     const searchResultContainer = document.getElementById('searchResultContainer');
     searchResultContainer.innerHTML = "";
-    if(searchString != ""){
-        pokemonToRender = await pokemon.filter(pokemon => pokemon.id == parseInt(searchString) || pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString) || pokemon.additionals.names[5].name.includes(searchString));        
-        pokemonToRender.forEach(result => {
-            searchResultContainer.innerHTML += returnResultTemplate(result);
-        })
+    if(parseInt(searchString)){
+        pokemonToRender = await pokemon.filter(pokemon => pokemon.id == parseInt(searchString)); 
+    }else if(searchString.length > 3){
+            pokemonToRender = await pokemon.filter(pokemon => pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString) || pokemon.additionals.names[5].name.includes(searchString));        
     }
+    pokemonToRender.forEach(result => {
+        searchResultContainer.innerHTML += returnResultTemplate(result);
+    })
 }
+
 
 /** Toggle the loading spinner overlay everytime we load data or render new data. */
 function toggleLoadingSpinner(){    
@@ -61,17 +64,4 @@ function toggleLoadingSpinner(){
         loadingScreen.close();
         isLoading = false;
     }
-}
-
-/** Change language of the whole site via options. */
-function changeLanguage(languageID){
-    const searchFieldRef = document.getElementById('searchField');
-    const mainContainer = document.getElementById('card_content');
-    mainContainer.innerHTML = "";
-    langID = languageID;
-    langString = langID == 8 ? "en" : "de";
-    renderedPokemon = 0;
-    toggleLoadingSpinner();
-    renderNextCards()
-    searchFieldRef.setAttribute('placeholder', TRANSLATION_TEXTS[langString].search); 
 }
