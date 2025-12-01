@@ -112,11 +112,24 @@ function returnHeighestStat(id){
     return allStats[0];
 }
 
+/** Sorting all stats in custom order. */
+function sortPokemonStats(id){
+    return stats = [
+        pokemon[id].stats.filter(stat => stat.stat.name == "hp")[0], 
+        pokemon[id].stats.filter(stat => stat.stat.name == "attack")[0],
+        pokemon[id].stats.filter(stat => stat.stat.name == "defense")[0],
+        pokemon[id].stats.filter(stat => stat.stat.name == "speed")[0],
+        pokemon[id].stats.filter(stat => stat.stat.name == "special-attack")[0],
+        pokemon[id].stats.filter(stat => stat.stat.name == "special-defense")[0]
+    ];
+}
+
 /** Retrieves stats of a Pokémon from the API. Get translation data for the stat names. */
 async function getPokemonStats(id){
     const statsContainerRef = document.getElementById('statsList');
     const heighestStat = await returnHeighestStat(id);
-    await pokemon[id].stats.forEach(async stat => {
+    const stats = sortPokemonStats(id);   
+    await stats.forEach(async stat => {
         const statResponse = await fetch(stat.stat.url);
         const statResponseToJson = await statResponse.json();
         const statName = statResponseToJson.names.filter(statName => statName.language.name == langString);

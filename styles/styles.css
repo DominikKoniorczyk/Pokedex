@@ -42,10 +42,6 @@
     flex-direction: column;
 }
 
-.logoImg{
-    padding: -50px;
-}
-
 .impressum_content{
     display: flex;
     flex-direction: column;
@@ -121,4 +117,12 @@
 
 .text_align_end{
     text-align: end;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 450px) {
+    .logo{
+        width: 260px;
+        height: auto;
+    }
 }

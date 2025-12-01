@@ -48,8 +48,26 @@ function checkElementIsInView(scrollYPosition)
  * Then executes the appropriate function to render or fetch the corresponding data.
 */
 function changeDialogInfo(id){
-    event.stopPropagation();
+    event.stopPropagation();    
+    actualSubInfo = id;
     switch(id){
+        case 0: 
+            setMainActive();
+            break;
+        case 1: 
+            setStatsActive();
+            break;
+        case 2:
+            setEvoActive();
+            break;
+        case 3: 
+            setShinyActive();
+            break;
+    }
+}
+
+function changeDialogInfoOnNextPokemon(){
+    switch(actualSubInfo){
         case 0: 
             setMainActive();
             break;

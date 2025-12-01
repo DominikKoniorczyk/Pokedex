@@ -59,6 +59,7 @@ async function refreshDialog(id){
     dialogRef.innerHTML = returnPokemonInfoTemplate(id);
     renderMainPage(id);
     renderEvolutionChain(evolutionChain);    
+    changeDialogInfoOnNextPokemon();
 }
 
 /** Triggered when switching between Pokémon in the dialog using the previous Pokémon or next Pokémon button. Call refreshDialog
@@ -81,4 +82,5 @@ function closeDialog(){
     dialogRef.close();
     dialogRef.innerHTML ="";
     dialogRef.classList.add('d_none');
+    actualSubInfo = 0;
 }
