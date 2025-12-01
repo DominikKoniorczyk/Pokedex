@@ -111,7 +111,7 @@ function getStatTemplate(statname, stat, heighestStat){
     return /*html*/`
     <tr class="stat_item">
         <td class="stat_name">${statname}</td>
-        <td class="stat_progress ${stat.stat.name}"><div class="stat_progress_bar" style="width: ${(parseInt(stat.base_stat)/parseInt(heighestStat.base_stat)) *  100}%"></div></td>
+        <td class="stat_progress"><div class="stat_progress_bar  ${stat.stat.name}" style="width: ${(parseInt(stat.base_stat)/parseInt(heighestStat.base_stat)) *  100}%"></div></td>
         <td class="text_align_end">${parseInt(stat.base_stat)}</td>
     </tr>
     `

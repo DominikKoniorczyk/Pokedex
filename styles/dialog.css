@@ -248,7 +248,7 @@ dialog{
 }
 
 .stat_name{
-    width: 25%;
+    width: 35%;
 }
 
 .stat_item{
@@ -263,7 +263,6 @@ dialog{
 
 .stat_progress_bar{
     height: 8px;
-    background-color: white;
 }
 
 .d_none{
