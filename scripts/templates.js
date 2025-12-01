@@ -116,3 +116,23 @@ function getStatTemplate(statname, stat, heighestStat){
     </tr>
     `
 }
+
+/** Returns settings html template for the options menu. */
+function getSettingsMenuTemplate(){
+    return /*html*/`
+        <div class="settings_menu">
+            <div class="setting_option_container">
+                <p>${TRANSLATION_TEXTS[langString].load_auto}</p>
+                <input class="checkbox" type="checkbox" ${autoReload ? checked="checked" : ""} name="Auto Reload" id="autoReload" onchange="changeReloadMethod()">
+            </div>   
+            <div class="setting_option_container">
+                <p>${TRANSLATION_TEXTS[langString].select_lang}</p>
+                <select name="language_selector" id="languageSelector" value="${langString}"onchange="selectNewLanguage()">
+                    <option value="en" ${langID == 8 ? selected="selected" : ""}>${TRANSLATION_TEXTS[langString].english}</option>
+                    <option value="de" ${langID == 5 ? selected="selected" : ""}>${TRANSLATION_TEXTS[langString].german}</option>
+                </select>
+            </div> 
+            <button onclick="applySettings()">${TRANSLATION_TEXTS[langString].apply}</button>  
+        </div>
+    `
+}

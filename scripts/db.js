@@ -6,6 +6,7 @@ let autoReload = false;
 let renderedPokemon = 0;
 let isLoading = false;
 let langID = 8;
+let lastLangID = 8;
 let actualSubInfo = 0;
 let langString = "en";
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=50000&offset=";
@@ -23,7 +24,12 @@ const TRANSLATION_TEXTS = {
         main: "main",
         stats: "stats",
         evo_chain: "evo chain",
-        shiny: "shiny"
+        shiny: "shiny",
+        load_auto: "Activate automatic loading on scrolling",
+        select_lang: "Language",
+        german: "German",
+        english: "English",
+        apply: "Apply all settings"
     },
     de : {
         weight: "Gewicht",
@@ -36,6 +42,11 @@ const TRANSLATION_TEXTS = {
         main: "Haupt",
         stats: "Stats",
         evo_chain: "Evolutionen",
-        shiny: "Gläzend"
+        shiny: "Gläzend",
+        load_auto: "Automatisches laden beim scrollen aktivieren",
+        select_lang: "Sprache",
+        german: "Deutsch",
+        english: "Englisch",
+        apply: "Einstellungen übernehmen"
     }
 }
