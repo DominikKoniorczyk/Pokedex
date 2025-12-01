@@ -1,6 +1,7 @@
 .search_area{
     position: fixed;
     top: 190px;
+
     .search_results{
         display: flex;
         flex-direction: column;
@@ -13,6 +14,19 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        border: none;
+
+        &:hover{
+            background-color: #185b71;
+        }
+    }
+
+    .search_field{
+        width: 240px;
+        height: 32px;
+        cursor: text;
+        border-radius: 8px;
+        border: none;
     }
 }
 
@@ -59,4 +73,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @media screen and (max-width: 500px){
+        width: 250px;
+        p{
+            font-size: 12px;
+        }
+    }
 }

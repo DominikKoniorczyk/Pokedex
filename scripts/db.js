@@ -7,6 +7,7 @@ let renderedPokemon = 0;
 let isLoading = false;
 let langID = 8;
 let lastLangID = 8;
+let optionsOpen = false;
 let actualSubInfo = 0;
 let langString = "en";
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=50000&offset=";
@@ -29,7 +30,9 @@ const TRANSLATION_TEXTS = {
         select_lang: "Language",
         german: "German",
         english: "English",
-        apply: "Apply all settings"
+        apply: "Apply all settings",
+        load_more: "Load more Pokémon",
+        imprint: "Imprint"
     },
     de : {
         weight: "Gewicht",
@@ -37,8 +40,8 @@ const TRANSLATION_TEXTS = {
         height: "Größe",
         abilities: "Fähigkeiten",
         search: "Suche ein Pokemon mit id oder name...",        
-        back: "zurück",
-        forward: "forwärts",
+        back: "Vorheriges",
+        forward: "Nächstes",
         main: "Haupt",
         stats: "Stats",
         evo_chain: "Evolutionen",
@@ -47,6 +50,8 @@ const TRANSLATION_TEXTS = {
         select_lang: "Sprache",
         german: "Deutsch",
         english: "Englisch",
-        apply: "Einstellungen übernehmen"
+        apply: "Einstellungen übernehmen",
+        load_more: "Mehr Pokémon laden",
+        imprint: "Impressum"
     }
 }

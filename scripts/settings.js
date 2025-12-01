@@ -1,11 +1,14 @@
 /** Open the settings menu under the settings button. */
 function openSettingsMenu(){
+    event.stopPropagation();
+    optionsOpen = true;
     const settingsContainer = document.getElementById('searchResultContainer');
     settingsContainer.innerHTML = getSettingsMenuTemplate();
 }
 
 /** Close the settings menu under the settings button and search bar. */
 function closeSettingsMenu(){
+    optionsOpen = false;
     const settingsContainer = document.getElementById('searchResultContainer');
     settingsContainer.innerHTML = "";
 }
@@ -34,6 +37,8 @@ function applySettings(){
 function changeLanguage(languageID){
     const searchFieldRef = document.getElementById('searchField');
     const mainContainer = document.getElementById('card_content');
+    document.getElementById('loadMoreButton').innerText = TRANSLATION_TEXTS[langString].load_more;
+    document.getElementById('imprintLink').innerText = TRANSLATION_TEXTS[langString].imprint;
     mainContainer.innerHTML = "";
     langString = langID == 8 ? "en" : "de";
     renderedPokemon = 0;

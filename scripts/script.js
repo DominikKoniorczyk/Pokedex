@@ -42,14 +42,17 @@ function returnShinyImg(pokemon){
 async function searchForPokemon(searchString){
     const searchResultContainer = document.getElementById('searchResultContainer');
     searchResultContainer.innerHTML = "";
-    if(parseInt(searchString)){
-        pokemonToRender = await pokemon.filter(pokemon => pokemon.id == parseInt(searchString)); 
-    }else if(searchString.length > 3){
+    pokemonToRender = [];
+    if(searchString !== ""){
+        if(parseInt(searchString)){
+            pokemonToRender = await pokemon.filter(pokemon => pokemon.id == parseInt(searchString)); 
+        }else if(searchString.length >= 3){
             pokemonToRender = await pokemon.filter(pokemon => pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString) || pokemon.additionals.names[5].name.includes(searchString));        
+        }
+        pokemonToRender.forEach(result => {
+            searchResultContainer.innerHTML += returnResultTemplate(result);
+        })
     }
-    pokemonToRender.forEach(result => {
-        searchResultContainer.innerHTML += returnResultTemplate(result);
-    })
 }
 
 
@@ -65,3 +68,12 @@ function toggleLoadingSpinner(){
         isLoading = false;
     }
 }
+
+/** Function to clear search field when pressing on a search result. */
+function clearSearchField(){
+    if(!optionsOpen){
+    const searchResultContainer = document.getElementById('searchResultContainer');
+    const inputRef = document.getElementById('searchField');
+    inputRef.value = "";
+    searchResultContainer.innerHTML = "";
+}}

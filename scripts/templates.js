@@ -74,7 +74,7 @@ function returnEvoChainContainer(evolution){
     return /*html*/`
         <div class="dialog_evo_chain_inner">
                 <img class="dialog_evo_chain_img" src="${evolution.mainImage != null ? evolution.mainImage : "./assets/img/question.png"}" alt="" srcset="">
-                <p>${evolution.name}</p>
+                <p>${evolution.additionals.names[langID].name}</p>
             </div>
     `
 }
@@ -102,7 +102,7 @@ function returnDialogMainTemplate(description, id){
 /** Returns a result button for the search results. Insert name and id of the pokemon on the result button. */
 function returnResultTemplate(result){
     return /*html*/`
-        <button class="result_button"onclick="openDialog(${(result.id - 1)})"> <p>#${result.id}</p> <p>${result.additionals.names[langID].name}</p></button>
+        <button class="result_button"onclick="openDialog(${(result.id - 1)}), clearSearchField()"> <p>#${result.id}</p> <p>${result.additionals.names[langID].name}</p></button>
     `
 }
 

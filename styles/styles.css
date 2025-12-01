@@ -3,12 +3,6 @@
     width: 20px;
 }
 
-.search_field{
-    width: 240px;
-    height: 32px;
-    cursor: text;
-}
-
 .auto_load{
     display: flex;
     flex-direction: row;
