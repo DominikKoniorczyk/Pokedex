@@ -126,7 +126,7 @@ dialog{
     justify-content: space-between;
     width: 90%;
     height: 48px;
-    background-color: var(--primary-bg-color);
+    background-color: rgba(0, 0, 0, 0);
     padding: 8px;
 }
 
@@ -199,6 +199,7 @@ dialog{
 }
 
 .dialog_evo_chain_inner{
+    height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;

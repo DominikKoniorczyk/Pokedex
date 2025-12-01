@@ -17,13 +17,26 @@ const TRANSLATION_TEXTS = {
         species: "Species",
         height: "Height",
         abilities: "Abilities",
-        search: "Search a Pokemon"
+        search: "Search a Pokemon",
+
+        back: "back",
+        forward: "forward",
+        main: "main",
+        stats: "stats",
+        evo_chain: "evo chain",
+        shiny: "shiny"
     },
     de : {
         weight: "Gewicht",
         species: "Spezies",
         height: "Größe",
         abilities: "Fähigkeiten",
-        search: "Suche ein Pokemon"
+        search: "Suche ein Pokemon",        
+        back: "zurück",
+        forward: "forwärts",
+        main: "Haupt",
+        stats: "Stats",
+        evo_chain: "Evo Kette",
+        shiny: "Gläzend"
     }
 }
