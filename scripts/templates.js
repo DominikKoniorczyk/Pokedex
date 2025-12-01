@@ -1,3 +1,4 @@
+/** Returning the main card html template for the small cards on the main page. */
 function returnCardTemplate(pokemonData={}, classes, id, imgPath) {
     return /*html*/`
         <article class = "card" onclick="openDialog(${pokemonData.id - 1})">
@@ -17,6 +18,7 @@ function returnCardTemplate(pokemonData={}, classes, id, imgPath) {
     `;
 }
 
+/** Returning the class images html for the small and big cards. */
 function returnClassImages(data){
     return /*html*/`
         <button class = "class_icon ${data.type.name}">
@@ -27,8 +29,8 @@ function returnClassImages(data){
     `;
 }
 
+/** Returning the html template for the info dialog by clicking on a small card. */
 function returnPokemonInfoTemplate(id){
-    getPokemonDescription(id);
     return /*html*/`
         <div class="dialog_body">
             <header class="dialog_header">
@@ -53,7 +55,7 @@ function returnPokemonInfoTemplate(id){
 
                 <div class="infoContainer">
                     <div id="mainContainer" class="dialog_main_info "></div>
-                    <div id="statsContainer" class="dialog_stats d_none"></div>
+                    <div id="statsContainer" class="dialog_stats d_none"><table id="statsList" class="stat_table"></table></div>
                     <div id="evolutionChainContainer" class="dialog_evo_chain d_none"></div>
                     <div id="shinyChainContainer" class="dialog_shiny_info d_none"><img class="shiny_img" src="${returnShinyImg(pokemon[id])}" alt=""></div>
                 </div>
@@ -67,6 +69,7 @@ function returnPokemonInfoTemplate(id){
     `;
 }
 
+/** Returns a html template for the evolution chain on the dialog body. */
 function returnEvoChainContainer(evolution){
     return /*html*/`
         <div class="dialog_evo_chain_inner">
@@ -76,24 +79,40 @@ function returnEvoChainContainer(evolution){
     `
 }
 
+/** Returns the html template for the evochain arrow image. */
 function returnEvoChainArrow(){
     return /*html*/`
         <img class="dialog_evo_chain_arrow" src="./assets/img/arrows.png" alt="Arrow to right">
     `;
 }
 
-function returnDialogMainTemplate(description, id, abilities){
+/** Returns the html template for the dialog main page. Insert texts for description, species, weight and height. Generate
+ * p-tag for the abilities.
+ */
+function returnDialogMainTemplate(description, id){
     return /*html*/`
         <p class="dialog_description">${description}</p>
         <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].species}: </p><p>${pokemon[id].additionals.names[langID].name}</p></div>
         <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].weight}: </p><p>${pokemon[id].weight} kg</p></div>
         <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].height}: </p><p>${pokemon[id].height * 10} cm</p></div>
-        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].abilities}: </p><p>${abilities}</p></div>
+        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].abilities}: </p><p id="abilityContainer" ></p></div>
     `
 }
 
+/** Returns a result button for the search results. Insert name and id of the pokemon on the result button. */
 function returnResultTemplate(result){
     return /*html*/`
         <button class="result_button"onclick="openDialog(${(result.id - 1)})"> <p>#${result.id}</p> <p>${result.name}</p></button>
+    `
+}
+
+/** Returns a html stat template for the dialog tab "stats". */
+function getStatTemplate(statname, stat, heighestStat){
+    return /*html*/`
+    <tr class="stat_item">
+        <td>${statname}</td>
+        <td class="stat_progress"><div class="stat_progress_bar" style="width: ${(parseInt(stat.base_stat)/parseInt(heighestStat.base_stat)) *  100}%"></div></td>
+        <td class="text_align_end">${parseInt(stat.base_stat)}</td>
+    </tr>
     `
 }

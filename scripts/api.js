@@ -1,3 +1,4 @@
+/** Function to fetch all pokemon from the pokemon api. */
 async function getAllPokemon(){
     toggleLoadingSpinner();
     loadDone = false;
@@ -8,12 +9,16 @@ async function getAllPokemon(){
     });
 }
 
+/** Fetch additional information about a pokomen. Returning the responsed data as json. */
 async function returnAdditionalInfo(responseData={}){
     const response = await fetch(responseData.species.url);
     const responseToJson = await response.json();      
     return responseToJson;
 }
 
+/** Fetch api data from database. Called from getAllPokemon on body loading. Save all fetched data to the pokemon array. 
+ *  call formateApiData for each element and sort Pokemon when loading is done.
+*/
 async function fetchApiData(responseData){
     const mainInfoUrl = responseData.url; 
     const mainInfo = await fetch(mainInfoUrl);
@@ -30,12 +35,14 @@ async function fetchApiData(responseData){
    }
 }
 
+/** Formating API Data check if the incoming data is allready in the array, if not save it to the pokemon array. Avoiding duplicates. */
 async function formateApiData(data={}){      
     if(pokemon.findIndex(element => element.id === data.id) === -1){  
         pokemon.push(data);
     };
 }
 
+/** Sorting Pokemon by id. */
 function sortPokemonById(){
     pokemon.sort((a, b) => a.id - b.id);
     for(let i = 0; i < pokemon.length; i++)
@@ -49,6 +56,7 @@ function sortPokemonById(){
     renderNextCards();
 }
 
+/** Fetching the evolution chain for a pokemon from the pokemon-api. Called when opening the pokemon details dialog. */
 async function getEvolutionChain(id){
     const outPut = []
     const response = await fetch(pokemon[id].additionals.evolution_chain.url);
@@ -66,6 +74,7 @@ async function getEvolutionChain(id){
     return outPut;    
 }
 
+/** Retrieves the description data from the Pokémon API and returns a formatted result in the selected language. */
 async function getPokemonDescription(id){
     const description = await fetch(pokemon[id].species.url);
     const descriptionAsJson = await description.json();
@@ -81,19 +90,38 @@ async function getPokemonDescription(id){
     return newResult; 
 }
 
+/** Retrieves the abilities of a Pokémon from the API and inserts the data into the description text of the Pokémon Details dialog window. */
 async function getPokemonAbilities(id){
-    let abilityNames = "";
-    pokemon[id].abilities.forEach(async ability => {
+    const abilityContainerRef = document.getElementById('abilityContainer');
+    abilityContainerRef.innerText = "";
+    await pokemon[id].abilities.forEach(async ability => {
         const response = await fetch(ability.ability.url);
         const responseToJson = await response.json();
         let abilityName = responseToJson.names.filter(lang => lang.language.name === langString);  
-        if(abilityNames === ""){
-            abilityNames = abilityName[0].name;
+        if(abilityContainerRef.innerText === ""){
+            abilityContainerRef.innerText = abilityName[0].name;
         }else {
-            abilityNames += ", " + abilityName[0].name; 
-        }
+            abilityContainerRef.innerText += ", " + abilityName[0].name;
+        }});        
+}
+
+/** Retrieves the heighest stat of the actual Pokémon on the details dialog. Return the heighest stat as an integer. */
+function returnHeighestStat(id){
+    const allStats = pokemon[id].stats
+    allStats.sort((a, b) => b.base_stat - a.base_stat);
+    return allStats[0];
+}
+
+/** Retrieves stats of a Pokémon from the API. Get translation data for the stat names. */
+async function getPokemonStats(id){
+    const statsContainerRef = document.getElementById('statsList');
+    const heighestStat = await returnHeighestStat(id);
+    await pokemon[id].stats.forEach(async stat => {
+        const statResponse = await fetch(stat.stat.url);
+        const statResponseToJson = await statResponse.json();
+        const statName = statResponseToJson.names.filter(statName => statName.language.name == langString);
+        statName.forEach(actual => {
+            statsContainerRef.innerHTML += getStatTemplate(actual.name, stat, heighestStat);
+        })       
     });
-    
-    console.log("3" + abilityNames);
-    return abilityNames;
 }

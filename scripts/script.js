@@ -1,8 +1,12 @@
+/** Called from body onload to init the website. Call addEventlistener and getAllPokemon. */
 function initWebsite(){
     addEventListener();
     getAllPokemon();
 }
 
+/** Checks if the image path / image link is valid or not. If it is not valid returns a placeholder image, else it
+ * returns the link to the pokemon image.
+*/
 function returnImagePath(pokemon){
     if(pokemon.mainImage != null){
         return pokemon.mainImage;
@@ -11,6 +15,9 @@ function returnImagePath(pokemon){
     }
 }
 
+/** Return the showdown front gif of an pokemon for the dialog main image if it is valid, try to return a image by 
+ * calling the returnImagePath function. 
+*/
 function returnGifPath(pokemon){
     if(pokemon.sprites.other.showdown.front_default != null)
     {
@@ -20,6 +27,9 @@ function returnGifPath(pokemon){
     }
 }
 
+/** Try to return the shiny image of the pokemon for the dialog. If the shiny image isn´t valid the function would 
+ * return the placeholder image.
+*/
 function returnShinyImg(pokemon){
     if(pokemon.sprites.front_shiny != null){
         return pokemon.sprites.front_shiny;
@@ -28,6 +38,7 @@ function returnShinyImg(pokemon){
     }
 }
 
+/** Search function via input field on the main page. Checks whether the incoming searchString contains an ID or the name of a Pokémon. */
 async function searchForPokemon(searchString){
     const searchResultContainer = document.getElementById('searchResultContainer');
     searchResultContainer.innerHTML = "";
@@ -39,6 +50,7 @@ async function searchForPokemon(searchString){
     }
 }
 
+/** Toggle the loading spinner overlay everytime we load data or render new data. */
 function toggleLoadingSpinner(){    
     const loadingScreen = document.getElementById('loadingSpinner');
     loadingScreen.classList.toggle('d_none');

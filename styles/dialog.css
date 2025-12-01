@@ -215,6 +215,33 @@ dialog{
     align-items: center;
 }
 
+.dialog_stats{
+    width: 90%;
+}
+
+.stat_table{
+    width: 100%;
+
+    td{
+        border-bottom: 1px solid black;
+    }
+}
+
+.stat_item{
+    vertical-align: sub;
+}
+
+.stat_progress{
+    height: 100%;
+    width: 55%;
+    vertical-align: middle;
+}
+
+.stat_progress_bar{
+    height: 8px;
+    background-color: white;
+}
+
 .d_none{
     display: none;
 }

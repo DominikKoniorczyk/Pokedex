@@ -1,3 +1,4 @@
+/** Renders the next 40 Pokémon cards on the main page. The limit is increased by 40. */
 function renderNextCards(search){
     const BODY_ELEMENT = document.getElementById('card_content');
     let end = search ? pokemonToRender.length : renderedPokemon + 40;
@@ -13,6 +14,7 @@ function renderNextCards(search){
     toggleLoadingSpinner();  
 }
 
+/** Opens the dialog for an pokemon depend on the incoming index. Render the dialog body and generating the needed container. */
 async function openDialog(id){
     const dialogRef = document.getElementById("details");
     const evolutionChain = await getEvolutionChain(id);
@@ -23,6 +25,9 @@ async function openDialog(id){
     dialogRef.showModal();
 }
 
+/** Renders the evolution chain to the evolution-chain-container on the dialog. Check if the image for the pokemon evolution
+ * is valid, if not get a placeholder image.
+*/
 async function renderEvolutionChain(evolutionChain){
     const evolutionImages = [];
     evolutionChain.forEach((evolution, i) =>{
@@ -35,13 +40,18 @@ async function renderEvolutionChain(evolutionChain){
     }) ;
 }
 
+/** Renders all main information about the pokemon with the incoming index on the details dialog. */
 async function renderMainPage(id){
     const mainRef = document.getElementById('mainContainer');
     const description = await getPokemonDescription(id);
-    const abilities = await getPokemonAbilities(id);
-    mainRef.innerHTML = returnDialogMainTemplate(description, id, abilities);
+    mainRef.innerHTML = returnDialogMainTemplate(description, id);
+    getPokemonAbilities(id);
+    getPokemonStats(id);
 }
 
+/** Triggered from getNextDialog when switching between Pokémon in the dialog using the previous Pokémon or next Pokémon button. 
+ * This updates the dialog and displays the new Pokémon. 
+*/
 async function refreshDialog(id){
     const dialogRef = document.getElementById("details");
     const evolutionChain = await getEvolutionChain(id);
@@ -51,6 +61,9 @@ async function refreshDialog(id){
     renderEvolutionChain(evolutionChain);    
 }
 
+/** Triggered when switching between Pokémon in the dialog using the previous Pokémon or next Pokémon button. Call refreshDialog
+ * and stop propagation to avoid closing the dialog.
+ */
 function getNextDialog(id){
     event.stopPropagation();
     if(id < 0){
@@ -62,6 +75,7 @@ function getNextDialog(id){
     }
 }
 
+/** Called when clicking on the page body outside of the dialog window to close the dialog. */
 function closeDialog(){
     const dialogRef = document.getElementById("details");
     dialogRef.close();

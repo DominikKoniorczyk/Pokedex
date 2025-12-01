@@ -9,6 +9,7 @@ let langID = 8;
 let langString = "en";
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=50000&offset=";
 
+/** Translation strings for english and german for all fixed strings on page. */
 const TRANSLATION_TEXTS = {
     en : {
         weight: "Weight",
