@@ -32,7 +32,7 @@ function returnClassImages(data){
 /** Returning the html template for the info dialog by clicking on a small card. */
 function returnPokemonInfoTemplate(id){
     return /*html*/`
-        <div class="dialog_body">
+        <div class="dialog_body" onclick="stopEventBubbling()">
             <header class="dialog_header">
                     <h2>#${pokemon[id].id}</h2>
                     <h2 class="dialog_inner_headline">${pokemon[id].additionals.names[langID].name}</h2>
@@ -92,10 +92,12 @@ function returnEvoChainArrow(){
 function returnDialogMainTemplate(description, id){
     return /*html*/`
         <p class="dialog_description">${description}</p>
-        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].species}: </p><p>${pokemon[id].additionals.names[langID].name}</p></div>
-        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].weight}: </p><p>${pokemon[id].weight} kg</p></div>
-        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].height}: </p><p>${pokemon[id].height * 10} cm</p></div>
-        <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].abilities}: </p><p id="abilityContainer" ></p></div>
+        <div class="dialog_short_stats">
+            <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].species}: </p><p>${pokemon[id].additionals.names[langID].name}</p></div>
+            <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].weight}: </p><p>${pokemon[id].weight} kg</p></div>
+            <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].height}: </p><p>${pokemon[id].height * 10} cm</p></div>
+            <div class="dialog_list"><p>${TRANSLATION_TEXTS[langString].abilities}: </p><p id="abilityContainer" ></p></div>
+        </div>
     `
 }
 

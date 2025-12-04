@@ -45,9 +45,9 @@ async function searchForPokemon(searchString){
     pokemonToRender = [];
     if(searchString !== ""){
         if(parseInt(searchString)){
-            pokemonToRender = await pokemon.filter(pokemon => pokemon.id == parseInt(searchString)); 
+            pokemonToRender = renderedPokemonList.filter(pokemon => pokemon.id == parseInt(searchString)); 
         }else if(searchString.length >= 3){
-            pokemonToRender = await pokemon.filter(pokemon => pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString) || pokemon.additionals.names[5].name.includes(searchString));        
+            pokemonToRender = await renderedPokemonList.filter(pokemon => pokemon.name.includes(searchString) || pokemon.nameLowerCase.includes(searchString));        
         }
         pokemonToRender.forEach(result => {
             searchResultContainer.innerHTML += returnResultTemplate(result);

@@ -24,7 +24,7 @@ async function fetchApiData(responseData){
     const mainInfo = await fetch(mainInfoUrl);
     const mainInfoToJson = await mainInfo.json();    
     const additionalInformation = await returnAdditionalInfo(mainInfoToJson);    
-    if(mainInfoToJson.id < 2000){
+    if(mainInfoToJson.id < 1300){
         const Data = {id: mainInfoToJson.id, name: mainInfoToJson.name.charAt(0).toUpperCase() + mainInfoToJson.name.slice(1), nameLowerCase: mainInfoToJson.name, species: mainInfoToJson.species, mainImage: mainInfoToJson.sprites.other.home.front_default, sprites: mainInfoToJson.sprites, types: [mainInfoToJson.types], weight: mainInfoToJson.weight, height: mainInfoToJson.height, stats: mainInfoToJson.stats, additionals: additionalInformation, abilities: mainInfoToJson.abilities};
         formateApiData(Data);
     } else {

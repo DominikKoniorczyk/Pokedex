@@ -1,4 +1,5 @@
 let pokemon = [];
+let renderedPokemonList = [];
 let pokemonToRender = [];
 let loadDone = false;
 let scrollChecking = false;

@@ -4,14 +4,20 @@ function renderNextCards(search){
     let end = renderedPokemon + 40;
     for (let i = renderedPokemon; i < end; i++) {
         renderedPokemon++;
-        let pokemonClasses = "";
-        if(pokemonToRender[i].types.length > 0){
-            pokemonToRender[i].types[0].forEach(classes => {
-                pokemonClasses += returnClassImages(classes);});          
-        }        
+        let pokemonClasses = tryChatchClassImage(i);
+        renderedPokemonList.push(pokemon[i]);     
         BODY_ELEMENT.innerHTML += returnCardTemplate(pokemonToRender[i], pokemonClasses, i, returnImagePath(pokemonToRender[i]));        
     }
     toggleLoadingSpinner();  
+}
+
+function tryChatchClassImage(i){
+    let pokemonClasses = "";
+    if(pokemonToRender[i].types.length > 0){
+        pokemonToRender[i].types[0].forEach(classes => {
+            pokemonClasses += returnClassImages(classes);}); 
+    }   
+    return pokemonClasses;      
 }
 
 /** Opens the dialog for an pokemon depend on the incoming index. Render the dialog body and generating the needed container. */
@@ -30,7 +36,7 @@ async function openDialog(id){
 */
 async function renderEvolutionChain(evolutionChain){
     const evolutionImages = [];
-    evolutionChain.forEach((evolution, i) =>{
+    evolutionChain.forEach((evolution, i) =>{        
         evolutionImages.push(evolution.mainImage != null ? evolution.mainImage : "./assets/img/question.png"); 
         const chainContainer = document.getElementById('evolutionChainContainer');
         chainContainer.innerHTML += returnEvoChainContainer(evolution);
@@ -66,10 +72,9 @@ async function refreshDialog(id){
  * and stop propagation to avoid closing the dialog.
  */
 function getNextDialog(id){
-    event.stopPropagation();
     if(id < 0){
-        refreshDialog(pokemon.length - 1);
-    } else if (id >= pokemon.length){
+        refreshDialog(renderedPokemon - 1);
+    } else if (id >= renderedPokemon){
         refreshDialog(0);
     } else {
         refreshDialog(id);
@@ -83,4 +88,8 @@ function closeDialog(){
     dialogRef.innerHTML ="";
     dialogRef.classList.add('d_none');
     actualSubInfo = 0;
+}
+
+function stopEventBubbling(){
+    event.stopPropagation();  
 }

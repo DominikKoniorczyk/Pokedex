@@ -48,7 +48,7 @@ function checkElementIsInView(scrollYPosition)
  * Then executes the appropriate function to render or fetch the corresponding data.
 */
 function changeDialogInfo(id){
-    event.stopPropagation();    
+    // stopEventBubbling();
     actualSubInfo = id;
     switch(id){
         case 0: 
