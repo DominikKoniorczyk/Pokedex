@@ -1,16 +1,23 @@
+/** Calle from load more button from website to load more pokemon. Init the new end amount. */
+function loadMorePokemon(){
+    toggleLoadingSpinner();
+    end = renderedPokemon + 40;
+    renderNextCards();
+}
+
 /** Renders the next 40 Pokémon cards on the main page. The limit is increased by 40. */
-function renderNextCards(search){
+function renderNextCards(){
     const BODY_ELEMENT = document.getElementById('card_content');
-    let end = renderedPokemon + 40;
     for (let i = renderedPokemon; i < end; i++) {
         renderedPokemon++;
         let pokemonClasses = tryChatchClassImage(i);
         renderedPokemonList.push(pokemon[i]);     
         BODY_ELEMENT.innerHTML += returnCardTemplate(pokemonToRender[i], pokemonClasses, i, returnImagePath(pokemonToRender[i]));        
     }
-    toggleLoadingSpinner();  
+    setTimeout(toggleLoadingSpinner, 1000);
 }
 
+/** Try to chatch class images. */
 function tryChatchClassImage(i){
     let pokemonClasses = "";
     if(pokemonToRender[i].types.length > 0){
@@ -90,6 +97,7 @@ function closeDialog(){
     actualSubInfo = 0;
 }
 
+/** Called everytime a dialog is open to prevent event bubbling. */
 function stopEventBubbling(){
     event.stopPropagation();  
 }

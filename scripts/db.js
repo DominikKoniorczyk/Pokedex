@@ -11,6 +11,7 @@ let lastLangID = 8;
 let optionsOpen = false;
 let actualSubInfo = 0;
 let langString = "en";
+let end = 0;
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=50000&offset=";
 
 /** Translation strings for english and german for all fixed strings on page. */

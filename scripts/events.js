@@ -11,10 +11,27 @@ function addEventListener(){
     }); 
 }
 
+function finalSearch(){
+    toggleLoadingSpinner();
+    const BODY_ELEMENT = document.getElementById('card_content');
+    const searchResultContainer = document.getElementById('searchResultContainer');
+    searchResultContainer.innerHTML = "";
+    BODY_ELEMENT.innerHTML = "";
+    renderedPokemon = 0;
+    end = pokemonToRender.length;
+    renderNextCards();
+}
+
 /** Function for searching for a specific Pokémon. Retrieves the value of the input field for the search and passes it on to the “searchForPokemon” function. */
 function searchPokemon(){
     const inputRef = document.getElementById('searchField');
+    const BODY_ELEMENT = document.getElementById('card_content');
     searchForPokemon(inputRef.value);    
+    if(inputRef.value.length == 0){
+        BODY_ELEMENT.innerHTML = "";
+        renderedPokemon = 0;
+        initWebsite();
+    }
 }
 
 /** Function to change the reload function of the page. Checks the value of the checkbox with the ID “autoReload” and switches between automatic and manual loading. */
@@ -39,6 +56,7 @@ function checkElementIsInView(scrollYPosition)
 
         if(positionY <= scrollYPosition){
             toggleLoadingSpinner();  
+            end = renderedPokemon + 40;
             renderNextCards();       
         }
     }
@@ -48,7 +66,6 @@ function checkElementIsInView(scrollYPosition)
  * Then executes the appropriate function to render or fetch the corresponding data.
 */
 function changeDialogInfo(id){
-    // stopEventBubbling();
     actualSubInfo = id;
     switch(id){
         case 0: 

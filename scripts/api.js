@@ -53,6 +53,7 @@ function sortPokemonById(){
         }}
     }
     pokemonToRender = pokemon;
+    end = renderedPokemon + 40;
     renderNextCards();
 }
 

@@ -24,20 +24,21 @@
 
     <title>Pokedex</title>
 </head>
-<body onload="initWebsite()" onclick="closeDialog(), clearSearchField()">
+<body onload="initWebsite()" onclick="closeDialog()">
     <header>
         <div class = "inner head margin_minus_fifty">
             <a class="logoImg" href="index.html"><img class="logo" src="./assets/img/pokedex_logo.png" alt="Pokedex logo"></a>
             <div class="search_area margin_minus_fifty">
                 <div class="header_settings">
-                    <input autocomplete="off" id="searchField" class="search_field" type="text" placeholder="Search a Pokemon by id or name..." onkeyup="searchPokemon(false)">
+                    <input autocomplete="off" id="searchField" class="search_field" type="text" placeholder="Search a Pokemon by id or name..." onkeyup="searchPokemon()">
+                    <button onclick="finalSearch()">Search</button>
                 </div>
                 <div id="searchResultContainer" class="search_results"></div>
             </div>
         </div>
     </header>
     <main id="card_content" class="inner"></main>
-    <button id="loadMoreButton" onclick="toggleLoadingSpinner(), renderNextCards()">Load more Pokémon</button>
+    <button id="loadMoreButton" onclick="loadMorePokemon()">Load more Pokémon</button>
     <dialog id="details" class="d_none">
     </dialog>
     <dialog class="loading_container d_none" id="loadingSpinner">

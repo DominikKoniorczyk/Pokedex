@@ -68,12 +68,3 @@ function toggleLoadingSpinner(){
         isLoading = false;
     }
 }
-
-/** Function to clear search field when pressing on a search result. */
-function clearSearchField(){
-    if(!optionsOpen){
-    const searchResultContainer = document.getElementById('searchResultContainer');
-    const inputRef = document.getElementById('searchField');
-    inputRef.value = "";
-    searchResultContainer.innerHTML = "";
-}}

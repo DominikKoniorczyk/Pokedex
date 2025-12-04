@@ -1,7 +1,7 @@
 /** Returning the main card html template for the small cards on the main page. */
 function returnCardTemplate(pokemonData={}, classes, id, imgPath) {
     return /*html*/`
-        <article class = "card" onclick="openDialog(${pokemonData.id - 1})">
+        <article class = "card" onclick="openDialog(${id})">
             <div class = "card_inner">
                 <div class = "card_headline">
                     <h2 class = "inner_headline">#${pokemonData.id}</h2>
@@ -34,16 +34,16 @@ function returnPokemonInfoTemplate(id){
     return /*html*/`
         <div class="dialog_body" onclick="stopEventBubbling()">
             <header class="dialog_header">
-                    <h2>#${pokemon[id].id}</h2>
-                    <h2 class="dialog_inner_headline">${pokemon[id].additionals.names[langID].name}</h2>
+                    <h2>#${pokemonToRender[id].id}</h2>
+                    <h2 class="dialog_inner_headline">${pokemonToRender[id].additionals.names[langID].name}</h2>
             </header>
             <main>
-                <div class="dialog_main_img ${pokemon[id].types[0][0].type.name}">
-                    <img src="${returnGifPath(pokemon[id])}" alt="" srcset="">
+                <div class="dialog_main_img ${pokemonToRender[id].types[0][0].type.name}">
+                    <img src="${returnGifPath(pokemonToRender[id])}" alt="" srcset="">
                 </div>
                 
                 <div class="dialog_classes">
-                    ${returnClassImages(pokemon[id].types[0][0])}
+                    ${returnClassImages(pokemonToRender[id].types[0][0])}
                 </div>
 
                 <div class="dialog_switches_container">
